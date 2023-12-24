@@ -30,3 +30,7 @@ ul {
     background-color: #c2c0c0;
 }
 
+.logo, img {
+    width: 200px;
+}
+
