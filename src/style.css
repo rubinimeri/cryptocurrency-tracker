@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Nunito:wght@500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Nunito:wght@400;500;600;700&display=swap');
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    /* border: 1px solid black; */
 }
 
 html, body {
@@ -12,6 +13,7 @@ html, body {
 
 body {
     font-family: 'Nunito', sans-serif;
+    /* background-color: #f4f4f4; */
 }
 
 h1, h2, h3 {
@@ -22,15 +24,192 @@ ul {
     list-style: none;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 /* Header */
 
 .header {
     width: 100%;
-    height: 18vh;
-    background-color: #c2c0c0;
+    min-height: 13vh;
+    background-color: #fff;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    gap: 0.7rem;
 }
 
-.logo, img {
-    width: 200px;
+nav {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    border-bottom: 1px solid #EFF2F5;
+    padding-bottom: 10px;
+}
+
+.top-nav div {
+    align-self: center;
+}
+
+.logo-container {
+    margin-right: auto;
+}
+
+.logo-container, img {
+    max-width: 200px;
+    
+}
+
+.top-nav svg {
+    vertical-align: middle;
+}
+
+.hamburger svg {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    display: none;
+}
+
+.bottom-nav{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid#EFF2F5;
+    padding-bottom: 11px;
+}
+
+.bottom-nav div {
+    font-size: 14px;
+    border-right: 2px solid gray;
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+.bottom-nav div a {
+    flex-grow: 1;
+    padding: 8px 0;
+}
+
+.bottom-nav div:hover {
+    color: #3861E7;
+    border-right:2px solid#3861E7;
+}
+
+.bottom-nav a:hover {
+    color: #3861E7;
+}
+
+.bottom-nav .login-register:hover {
+    border: none;
+}
+.bottom-nav .register:hover {
+    color: white;
+    opacity: 0.9;
+}
+.bottom-nav .login:hover {
+    opacity: 0.8;
+}
+
+.bottom-nav .login-register {
+    border: none;
+    margin-left: 30%;
+}
+
+.login,
+.register {
+    flex-grow: 1;
+}
+
+.register {
+    background-color: #3861E7;
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.login {
+    border: 1px solid #3861E7;
+    border-radius: 8px;
+    color: #3861E7;
+}
+
+@media only screen and (max-width: 900px) {
+    .hamburger svg{
+        display: block;
+    }
+    .top-nav input,
+    .bottom-nav {
+        display: none;
+    }
+    
+    .header {
+        min-height: 8vh;
+    }
+    .bottom-nav {
+        height: 100%;
+        position: absolute;
+        top: 8vh;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        height: 350px;
+        background: white;
+        transition: 0.2s;
+        flex-direction: column;
+        padding: 2rem;
+    }
+    .bottom-nav.active {
+        display: flex;
+    }
+    .container.active {
+        
+    }
+    .bottom-nav div {
+        border-bottom: 1px solid #EFF2F5;
+        border-right: none;
+        text-align: left;
+        justify-self: center;
+        display: flex;
+        cursor: pointer;
+        padding-bottom: 0.8rem;
+        
+    }
+    .bottom-nav div a {
+        align-self: flex-end;
+    }
+    .login-register a{
+        text-align: center;
+    }
+    .bottom-nav .login-register {
+        border: none;
+        margin: 0;
+    }
+    .top-nav {
+        border: none;
+        
+    }
+
+}
+
+/* Container */
+
+.container {
+    display: grid;
+    place-content: center;
+    gap: 3rem;
+    padding: 2rem;
 }
 
