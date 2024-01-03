@@ -1,17 +1,8 @@
-import './style.css'
+import './styles/header.css'
+import './styles/style.css'
 import './assets/logo-dark.png'
+import { showMenu, moveSearchSelect } from './display-controller.js';
 
-// Get DOM elements
-const container = document.querySelector(".container");
-const hamburgerMenu = document.querySelector(".hamburger");
-const bottomNav = document.querySelector(".bottom-nav")
-const topNav = document.querySelector(".top-nav")
-const searchBar = document.getElementById("search")
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    hamburgerMenu.addEventListener("click", () => {
-        bottomNav.classList.toggle("active")
-        container.classList.toggle("active")
-    })
-})
+showMenu();
+moveSearchSelect();
+window.addEventListener("resize", moveSearchSelect);
