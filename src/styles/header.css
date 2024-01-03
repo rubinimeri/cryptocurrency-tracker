@@ -105,11 +105,12 @@ nav {
     height: 14px;
 }
 
-.hamburger svg {
+.hamburger {
     cursor: pointer;
     width: 28px;
     height: 28px;
     display: none;
+    flex: 0;
 }
 
 .bottom-nav{
@@ -178,8 +179,9 @@ nav {
 }
 
 @media only screen and (max-width: 900px) {
-    .hamburger svg{
+    .hamburger {
         display: block;
+        flex: 0;
     }
     .bottom-nav {
         display: none;
