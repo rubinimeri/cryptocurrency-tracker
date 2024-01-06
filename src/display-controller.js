@@ -62,3 +62,23 @@ export function checkPage() {
         }
     })
 }
+
+// Coin creator, takes information and will be used to
+// make a 'coin-card'
+export function coinCreator(number, name, price, hour, twentyFourHour, marketCap, volume, circulatingSupply) {
+    const table = document.querySelector(".crypto-list table");
+    const row = document.createElement("tr");
+    row.classList.add("table-row", "coin-info")
+    table.append(row);
+
+    for(let i = 0; i < 8; i++) {
+        const data = arguments;
+        const td = document.createElement("td");
+        row.append(td);
+
+        const span = document.createElement("span");
+        td.append(span);
+
+        span.textContent = arguments[i];
+    }
+}

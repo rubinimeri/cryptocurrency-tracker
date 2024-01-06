@@ -48,7 +48,7 @@ a {
 table {
     min-width: 1200px;
     padding: 0 12px;
-    background-color: #EFF2F5;
+    border-collapse: collapse;
 }
 
 .crypto-list {
@@ -67,19 +67,27 @@ table {
 }
 
 .table-row th {
-    border: 1px solid;
     text-align: right;
     font-size: 13px;
-    padding: 4px;
+    padding: 12px;
+}
+
+.table-row {
+    border-top: 1px solid #EFF2F5;
+    border-bottom: 1px solid #EFF2F5;
 }
 
 .table-row td {
     font-weight: bold;
     text-align: right;
     height: 60px;
-    padding: 4px;
+    padding: 12px;
 }
 
 .coin-info {
     cursor: pointer;
+}
+
+.coin-info:hover {
+    background-color: #F8FAFD;
 }
