@@ -47,18 +47,22 @@ a {
 
 table {
     min-width: 1200px;
+    padding: 0 12px;
+    background-color: #EFF2F5;
 }
 
 .crypto-list {
     overflow: auto;
 }
 
-.table-row th:first-child {
+.table-row th:first-child,
+.table-row th:nth-child(2),
+.table-row td:first-child,
+.table-row td:nth-child(2) {
     text-align: left;
 }
 
 .table-row th:nth-child(2) {
-    text-align: left;
     width: 200px;
 }
 
@@ -67,4 +71,15 @@ table {
     text-align: right;
     font-size: 13px;
     padding: 4px;
+}
+
+.table-row td {
+    font-weight: bold;
+    text-align: right;
+    height: 60px;
+    padding: 4px;
+}
+
+.coin-info {
+    cursor: pointer;
 }
