@@ -43,6 +43,16 @@ a {
     text-align: center;
 }
 
+::-webkit-scrollbar {
+    height: 0.5rem;
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #CFD6E4;
+    border-radius: 8px;
+}
+
 /* Coins */
 
 table {
@@ -60,6 +70,7 @@ table {
 .table-row td:first-child,
 .table-row td:nth-child(2) {
     text-align: left;
+    position: sticky;
 }
 
 .table-row th:nth-child(2) {
@@ -80,7 +91,7 @@ table {
 .table-row td {
     font-weight: bold;
     text-align: right;
-    height: 60px;
+    height: 85px;
     padding: 12px;
 }
 
