@@ -36,6 +36,35 @@ a {
     display: grid;
     place-content: center;
     gap: 3rem;
-    padding: 2rem;
+    padding: 3rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+    text-align: center;
 }
 
+/* Coins */
+
+table {
+    min-width: 1200px;
+}
+
+.crypto-list {
+    overflow: auto;
+}
+
+.table-row th:first-child {
+    text-align: left;
+}
+
+.table-row th:nth-child(2) {
+    text-align: left;
+    width: 200px;
+}
+
+.table-row th {
+    border: 1px solid;
+    text-align: right;
+    font-size: 13px;
+    padding: 4px;
+}
