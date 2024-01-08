@@ -1,16 +1,15 @@
 import './styles/header.css'
 import './styles/style.css'
 import './assets/logo-dark.png'
-import { showMenu, moveSearchSelect, checkPage, coinCreator } from './display-controller.js';
+import { showMenu, moveSearchSelect, checkPage, coinCreator, addCoin } from './display-controller.js';
+import { coinWatch } from './fetch-data.js';
 
 showMenu();
 moveSearchSelect();
 window.addEventListener("resize", moveSearchSelect);
 checkPage();
 
-coinCreator(2, "Ethereum", "$5,241", "+24%", "+18%", "$591,980,163,421", "$4,873,691,173", "42,515,188");
-coinCreator(3, "Tether USDT", "$5,241", "+24%", "+18%", "$591,980,163,421", "$4,873,691,173", "42,515,188");
-coinCreator(4, "Solana", "$5,241", "+24%", "+18%", "$591,980,163,421", "$4,873,691,173", "42,515,188");
-coinCreator(5, "BNB", "$5,241", "+24%", "+18%", "$591,980,163,421", "$4,873,691,173", "42,515,188");
-coinCreator(6, "XRP", "$5,241", "+24%", "+18%", "$591,980,163,421", "$4,873,691,173", "42,515,188");
-coinCreator(7, "USDC", "$5,241", "+24%", "+18%", "$591,980,163,421", "$4,873,691,173", "42,515,188");
+// Add coins
+await addCoin("BTC");
+await addCoin("ETH");
+await addCoin("USDT");

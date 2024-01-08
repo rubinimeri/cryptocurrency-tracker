@@ -1,3 +1,5 @@
+import { coinWatch } from "./fetch-data";
+
 // Show hamburger menu
 export function showMenu() {
     // When DOM content is loaded, add an event listener to
@@ -65,7 +67,7 @@ export function checkPage() {
 
 // Coin creator, takes information and will be used to
 // make a 'coin-card'
-export function coinCreator(number, name, price, hour, twentyFourHour, marketCap, volume, circulatingSupply) {
+export function coinCreator(number, name, price, hour, day, marketCap, volume, circulatingSupply) {
     const table = document.querySelector(".crypto-list table");
     const row = document.createElement("tr");
     row.classList.add("table-row", "coin-info")
@@ -81,4 +83,35 @@ export function coinCreator(number, name, price, hour, twentyFourHour, marketCap
 
         span.textContent = arguments[i];
     }
+}
+
+// Function that makes big numbers easier to
+// read
+function addCommasToNumber(number) {
+    // Convert the number to a string
+    let numString = Math.floor(number).toString();
+  
+    // Use a regular expression to add commas
+    numString = numString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  
+    return numString;
+}
+
+
+// Use data from API and coinCreator func. to
+// add real-time data about cryptocurrencies
+export async function addCoin(coin) {
+    const coinData = await coinWatch(coin);
+
+    // Adjust data
+    const rank = coinData.rank;
+    const name = coinData.name;
+    const price = `$${addCommasToNumber(coinData.price)}`;
+    const hour = ((coinData.hour - 1) * 100).toFixed(2);
+    const day = ((coinData.day - 1) * 100).toFixed(2);
+    const marketCap = `$${addCommasToNumber(coinData.marketCap)}`;
+    const volume = `$${addCommasToNumber(coinData.volume)}`;
+    const circulatingSupply = `$${addCommasToNumber(coinData.circulatingSupply)}`;
+    
+    coinCreator(rank, name, price, hour, day, marketCap, volume, circulatingSupply);
 }
