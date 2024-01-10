@@ -11,6 +11,7 @@ footer {
     align-items: center;
     flex-wrap: wrap;
     gap: 2rem;
+    border-top: 1px solid var(--border-color);
 }
 
 footer div {
