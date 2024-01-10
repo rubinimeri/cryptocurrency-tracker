@@ -16,7 +16,7 @@ checkPage();
 const currentPage = window.location.pathname;
 console.log(currentPage)
 
-if(currentPage === '/cryptocurrency-tracker/index.html') {
+if(currentPage === '/dist/index.html') {
     // Add coins
     await addCoin("BTC");
     await addCoin("ETH");
