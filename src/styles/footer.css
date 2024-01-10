@@ -1,0 +1,19 @@
+body {
+    position: relative;
+}
+
+footer {
+    width: 100%;
+    background: white;
+    padding: 100px 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+footer div {
+    flex-grow: 1;
+    text-align: center;
+}

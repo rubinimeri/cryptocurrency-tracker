@@ -89,7 +89,7 @@ export function coinCreator(number, name, price, hour, day, marketCap, volume, c
 // read
 function addCommasToNumber(number) {
     // Convert the number to a string
-    let numString = Math.floor(number).toString();
+    let numString = number.toString();
   
     // Use a regular expression to add commas
     numString = numString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -106,7 +106,7 @@ export async function addCoin(coin) {
     // Adjust data
     const rank = coinData.rank;
     const name = coinData.name;
-    const price = `$${addCommasToNumber(coinData.price)}`;
+    const price = `$${addCommasToNumber(coinData.price.toFixed(2))}`;
     const hour = ((coinData.hour - 1) * 100).toFixed(2);
     const day = ((coinData.day - 1) * 100).toFixed(2);
     const marketCap = `$${addCommasToNumber(coinData.marketCap)}`;

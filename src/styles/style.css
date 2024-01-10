@@ -18,7 +18,10 @@ html, body {
 
 body {
     font-family: 'Nunito', sans-serif;
-    /* background-color: #f4f4f4; */
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 h1, h2, h3 {
@@ -38,14 +41,16 @@ a {
 /* Container */
 
 .container {
-    display: grid;
-    place-content: center;
+    flex-grow: 1;
+    min-height: 80vh;
     gap: 3rem;
-    padding: 3rem 0;
-    max-width: 1200px;
-    margin: 0 auto;
-    grid-template-columns: 1fr;
+    padding: 2rem 2rem;
     text-align: center;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow: auto;
 }
 
 ::-webkit-scrollbar {
@@ -68,6 +73,9 @@ table {
 
 .crypto-list {
     overflow: auto;
+    flex-grow: 1;
+    margin: 0 auto;
+    align-self: center;
 }
 
 .table-row th:first-child,
