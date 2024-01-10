@@ -1,0 +1,59 @@
+.about-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 400px;
+    padding: 100px 20vw;
+    gap: 30px;
+}
+
+h1 {
+    z-index: 1;
+    font-size: 30px;
+}
+
+.about-section p {
+    z-index: 1;
+    margin: auto 0;
+    max-width: 600px;
+    /* font-weight: bold; */
+}
+
+.blue{
+    background: #2746AB;
+    color: white;
+}
+
+.white {
+    background: white;
+    /* color: white; */
+}
+
+.spacer {
+    aspect-ratio: 900/200;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.layer1 {
+    background-image: url(../assets/wave-white.svg);
+    width: auto;
+}
+
+.layer2 {
+    background-image: url(../assets/wave-white.svg);
+}
+
+.flip {
+    transform: rotate(180deg);
+}
+
+.blob-motion {
+    position: absolute;
+    transform: translateY(-20%);
+    width: 100%;
+    display: none;
+}

@@ -17,5 +17,8 @@
     "file-loader": "^6.2.0",
     "style-loader": "^3.3.3",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "kute.js": "^2.2.4"
   }
 }
