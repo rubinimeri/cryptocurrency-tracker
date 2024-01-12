@@ -2,6 +2,7 @@ import './styles/header.css'
 import './styles/style.css'
 import './styles/about.css'
 import './styles/footer.css'
+import './styles/contact.css'
 import './assets/logo-dark.png'
 import { showMenu, moveSearchSelect, checkPage, addCoin } from './display-controller.js';
 
