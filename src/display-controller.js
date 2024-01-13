@@ -84,8 +84,10 @@ export function coinCreator(number, name, price, hour, day, marketCap, volume, c
         // Add classes
         if ((i === 3 || i === 4) && parseFloat(span.textContent) > 0) {
             span.classList.add("positive");
+            span.classList.add("percent");
         } else if ((i === 3 || i === 4) && parseFloat(span.textContent) < 0) {
             span.classList.add("negative");
+            span.classList.add("percent");
         }
     }
 }

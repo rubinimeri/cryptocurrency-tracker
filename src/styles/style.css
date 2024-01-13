@@ -121,6 +121,19 @@ table {
     background-color: #F8FAFD;
 }
 
+.positive::before {
+    content: "+";
+}
+
+.negative {
+    color: #E64F42;
+}
+
+
+.percent::after {
+    content: "%";
+}
+
 /* Pages */
 
 .pages {
@@ -149,8 +162,4 @@ table {
 
 .positive {
     color: #6FC984;
-}
-
-.negative {
-    color: #E64F42;
 }
