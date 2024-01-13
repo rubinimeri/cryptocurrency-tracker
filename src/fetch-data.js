@@ -1,3 +1,5 @@
+import { Coin } from "./coin-data";
+
 // Live Coin Watch API
 
 export async function coinWatch (coin) {
@@ -15,16 +17,10 @@ export async function coinWatch (coin) {
             }),
           });
         const data = await response.json();
-        const dataObj = {
-            rank: data.rank, 
-            name: data.name, 
-            price: data.rate, 
-            hour: data.delta.hour, 
-            day: data.delta.day, 
-            marketCap: data.cap, 
-            volume: data.volume, 
-            circulatingSupply: data.totalSupply
-        };
+
+        // Create Coin object with API data
+        const dataObj = Coin(data.rank, data.name, data.rate, data.delta.hour, data.delta.day, data.cap, data.volume, data.totalSupply);
+        
         return dataObj;
     } catch (error) {
         console.error(error)

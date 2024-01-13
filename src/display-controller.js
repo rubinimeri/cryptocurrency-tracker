@@ -1,4 +1,5 @@
 import { coinWatch } from "./fetch-data";
+import { coins } from "./coin-data";
 
 // Show hamburger menu
 export function showMenu() {
@@ -98,20 +99,20 @@ function addCommasToNumber(number) {
 }
 
 
-// Use data from API and coinCreator func. to
-// add real-time data about cryptocurrencies
-export async function addCoin(coin) {
-    const coinData = await coinWatch(coin);
+// Use data from 'coins' array, to add coins to the DOM
+export async function addCoins(coins) {
 
-    // Adjust data
-    const rank = coinData.rank;
-    const name = coinData.name;
-    const price = `$${addCommasToNumber(coinData.price.toFixed(2))}`;
-    const hour = ((coinData.hour - 1) * 100).toFixed(2);
-    const day = ((coinData.day - 1) * 100).toFixed(2);
-    const marketCap = `$${addCommasToNumber(coinData.marketCap)}`;
-    const volume = `$${addCommasToNumber(coinData.volume)}`;
-    const circulatingSupply = `$${addCommasToNumber(coinData.circulatingSupply)}`;
-    
-    coinCreator(rank, name, price, hour, day, marketCap, volume, circulatingSupply);
+    coins.forEach(coin => {
+        // Adjust data
+        const rank = coin.rank;
+        const name = coin.name;
+        const price = addCommasToNumber(coin.price);
+        const hour = coin.hour;
+        const day = coin.day;
+        const marketCap = `$${addCommasToNumber(coin.marketCap)}`;
+        const volume = `$${addCommasToNumber(coin.volume)}`;
+        const circulatingSupply = `$${addCommasToNumber(coin.circulatingSupply)}`;
+
+        coinCreator(rank, name, price, hour, day, marketCap, volume, circulatingSupply);
+    })
 }
