@@ -146,3 +146,11 @@ table {
     align-items: center;
     cursor: pointer;
 }
+
+.positive {
+    color: #6FC984;
+}
+
+.negative {
+    color: #E64F42;
+}

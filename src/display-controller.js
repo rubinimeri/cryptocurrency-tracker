@@ -1,6 +1,3 @@
-import { coinWatch } from "./fetch-data";
-import { coins } from "./coin-data";
-
 // Show hamburger menu
 export function showMenu() {
     // When DOM content is loaded, add an event listener to
@@ -81,8 +78,15 @@ export function coinCreator(number, name, price, hour, day, marketCap, volume, c
 
         const span = document.createElement("span");
         td.append(span);
-
+    
         span.textContent = arguments[i];
+
+        // Add classes
+        if ((i === 3 || i === 4) && parseFloat(span.textContent) > 0) {
+            span.classList.add("positive");
+        } else if ((i === 3 || i === 4) && parseFloat(span.textContent) < 0) {
+            span.classList.add("negative");
+        }
     }
 }
 
@@ -115,4 +119,4 @@ export async function addCoins(coins) {
 
         coinCreator(rank, name, price, hour, day, marketCap, volume, circulatingSupply);
     })
-}
+};
