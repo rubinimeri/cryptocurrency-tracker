@@ -117,7 +117,7 @@ export async function addCoins(coins) {
         const day = coin.day;
         const marketCap = `$${addCommasToNumber(coin.marketCap)}`;
         const volume = `$${addCommasToNumber(coin.volume)}`;
-        const circulatingSupply = `$${addCommasToNumber(coin.circulatingSupply)}`;
+        const circulatingSupply = addCommasToNumber(coin.circulatingSupply);
 
         coinCreator(rank, name, price, hour, day, marketCap, volume, circulatingSupply);
     })
