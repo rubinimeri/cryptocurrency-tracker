@@ -122,3 +122,14 @@ export async function addCoins(coins) {
         coinCreator(rank, name, price, hour, day, marketCap, volume, circulatingSupply);
     })
 };
+
+// Remove table data
+
+export function removeTableData() {
+    const table = document.querySelector(".crypto-list table");
+    const coinInfo = table.querySelectorAll(".coin-info");
+
+    coinInfo.forEach(coin => {
+        coin.remove();
+    });
+}
