@@ -134,6 +134,10 @@ table {
     content: "%";
 }
 
+.display-none {
+    display: none;
+}
+
 /* Pages */
 
 .pages {

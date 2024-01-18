@@ -71,6 +71,8 @@ export function coinCreator(number, name, price, hour, day, marketCap, volume, c
     row.classList.add("table-row", "coin-info")
     table.append(row);
 
+    row.addEventListener("click", loadCoinDetails)
+
     for(let i = 0; i < 8; i++) {
         const data = arguments;
         const td = document.createElement("td");
@@ -132,4 +134,14 @@ export function removeTableData() {
     coinInfo.forEach(coin => {
         coin.remove();
     });
+}
+
+// Dynamically loaded 'coin-details' section
+// when coin is clicked
+
+function loadCoinDetails() {
+    const cryptoList = document.querySelector(".crypto-list");
+    const pages = document.querySelector(".pages");
+    cryptoList.classList.add("display-none");
+    pages.classList.add("display-none");
 }

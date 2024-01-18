@@ -27,7 +27,7 @@ let XRP = await coinWatch("XRP");
 coins.push(BTC, ETH, USDT, BNB, SOL, XRP);
 
 // Every 6 seconds, get new data from API
-setInterval(async () => {
+/* setInterval(async () => {
     BTC = await coinWatch("BTC");
     ETH = await coinWatch("ETH");
     BNB = await coinWatch("BNB");
@@ -39,7 +39,7 @@ setInterval(async () => {
     coins.push(BTC, ETH, USDT, BNB, SOL, XRP);
     removeTableData();
     addCoins(coins);
-}, 6000)
+}, 6000) */
 
 // Add coins to DOM
 
