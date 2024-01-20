@@ -99,6 +99,10 @@ table {
     text-align: right;
     font-size: 13px;
     padding: 12px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
 }
 
 .table-row {
@@ -135,7 +139,7 @@ table {
 }
 
 .display-none {
-    display: none;
+    display: none !important;
 }
 
 /* Pages */
