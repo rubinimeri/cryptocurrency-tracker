@@ -19,7 +19,7 @@ export async function coinWatch (coin) {
         const data = await response.json();
 
         // Create Coin object with API data
-        const dataObj = Coin(data.rank, data.name, data.rate, data.delta.hour, data.delta.day, data.cap, data.volume, data.totalSupply);
+        const dataObj = Coin(data.rank, data.png32, data.name, data.rate, data.delta.hour, data.delta.day, data.cap, data.volume, data.totalSupply);
         
         return dataObj;
     } catch (error) {

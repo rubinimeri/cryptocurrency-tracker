@@ -84,7 +84,12 @@ table {
 .table-row td:first-child,
 .table-row td:nth-child(2) {
     text-align: left;
-    position: sticky;
+}
+
+td:nth-child(2) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .table-row td:first-child {

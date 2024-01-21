@@ -26,6 +26,8 @@ let XRP = await coinWatch("XRP");
 
 coins.push(BTC, ETH, USDT, BNB, SOL, XRP);
 
+console.log(coins);
+
 // Every 6 seconds, get new data from API
 /* setInterval(async () => {
     BTC = await coinWatch("BTC");

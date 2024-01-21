@@ -65,29 +65,41 @@ export function checkPage() {
 
 // Coin creator, takes information and will be used to
 // make a 'coin-card'
-export function coinCreator(number, name, price, hour, day, marketCap, volume, circulatingSupply) {
+export function coinCreator(number, logo, name, price, hour, day, marketCap, volume, circulatingSupply) {
     const table = document.querySelector(".crypto-list table");
     const row = document.createElement("tr");
+    const logoElement = document.createElement("img");
     row.classList.add("table-row", "coin-info")
     table.append(row);
 
     row.addEventListener("click", loadCoinDetails)
 
-    for(let i = 0; i < 8; i++) {
+    for(let i = 0; i < 9; i++) {
         const data = arguments;
         const td = document.createElement("td");
         row.append(td);
-
         const span = document.createElement("span");
+
+        if(i === 1) {
+            // Add coin logos to table
+            logoElement.src = logo;
+            td.append(logoElement);
+
+            span.textContent = name;
+            td.append(span);
+            i++;
+            continue;
+        }
+
         td.append(span);
     
         span.textContent = arguments[i];
 
         // Add classes
-        if ((i === 3 || i === 4) && parseFloat(span.textContent) > 0) {
+        if ((i === 4 || i === 5) && parseFloat(span.textContent) > 0) {
             span.classList.add("positive");
             span.classList.add("percent");
-        } else if ((i === 3 || i === 4) && parseFloat(span.textContent) < 0) {
+        } else if ((i === 4 || i === 5) && parseFloat(span.textContent) < 0) {
             span.classList.add("negative");
             span.classList.add("percent");
         }
@@ -113,6 +125,7 @@ export async function addCoins(coins) {
     coins.forEach(coin => {
         // Adjust data
         const rank = coin.rank;
+        const logo = coin.logo;
         const name = coin.name;
         const price = addCommasToNumber(coin.price);
         const hour = coin.hour;
@@ -121,7 +134,7 @@ export async function addCoins(coins) {
         const volume = `$${addCommasToNumber(coin.volume)}`;
         const circulatingSupply = addCommasToNumber(coin.circulatingSupply);
 
-        coinCreator(rank, name, price, hour, day, marketCap, volume, circulatingSupply);
+        coinCreator(rank, logo, name, price, hour, day, marketCap, volume, circulatingSupply);
     })
 };
 
