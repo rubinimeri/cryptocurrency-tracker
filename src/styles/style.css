@@ -66,6 +66,13 @@ a {
 
 /* Coins */
 
+.loader {
+    height: 100%;
+    width: 100vw;
+    background: white url(../assets/loading.gif) no-repeat center center;
+    z-index: 2;
+}
+
 table {
     min-width: 1200px;
     padding: 0 12px;

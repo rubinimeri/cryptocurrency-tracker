@@ -158,3 +158,11 @@ function loadCoinDetails() {
     cryptoList.classList.add("display-none");
     pages.classList.add("display-none");
 }
+
+
+// Function that removes loading gif
+// when coins are loaded
+export function stopLoading() {
+    const loader = document.querySelector(".loader");
+    loader.classList.add(".display-none");
+}
