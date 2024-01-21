@@ -164,5 +164,5 @@ function loadCoinDetails() {
 // when coins are loaded
 export function stopLoading() {
     const loader = document.querySelector(".loader");
-    loader.classList.add(".display-none");
+    loader.classList.add("display-none");
 }
