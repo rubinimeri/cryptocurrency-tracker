@@ -155,6 +155,8 @@ export function removeTableData() {
 function loadCoinDetails() {
     const cryptoList = document.querySelector(".crypto-list");
     const pages = document.querySelector(".pages");
+    const coinDetails = document.querySelector(".coin-details");
+    coinDetails.classList.remove("display-none");
     cryptoList.classList.add("display-none");
     pages.classList.add("display-none");
 }
