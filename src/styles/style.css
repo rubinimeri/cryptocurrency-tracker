@@ -188,11 +188,6 @@ td:nth-child(2) {
     color: #6FC984;
 }
 
-.coin-details {
-    display: flex;
-    flex-direction: column;
-}
-
 .hero-title {
     position: sticky;
     inset: 0 0 0 0;
@@ -201,4 +196,13 @@ td:nth-child(2) {
 .pages {
     position: sticky;
     inset: 0 0 0 0;
+}
+
+/* Coin details */
+
+.coin-details {
+    display: flex;
+    flex-direction: column;
+    flex: 0;
+    display: none;
 }
