@@ -4,7 +4,8 @@ import Chart from "chart.js/auto";
  * Function that selects canvas from HTML and loads chart
  */
 export async function loadChartWithData(dates, prices, numTicks) {
-  const ctx = document.getElementById("myChart").getContext("2d");
+  const ctx = document.getElementById("myChart");
+  console.log(ctx);
   return new Chart(ctx, config(dates, prices, numTicks));
 }
 
@@ -26,7 +27,8 @@ const config = function (dates, prices, numTicks) {
           pointHoverRadius: 0,
         },
       ],
-      options: {
+    },
+    options: {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
@@ -55,7 +57,6 @@ const config = function (dates, prices, numTicks) {
           },
         },
       },
-    },
   };
 };
 
@@ -63,7 +64,7 @@ const config = function (dates, prices, numTicks) {
  * Recreate the chart with updated properties depending on
  * window width
 */
-function loadResizedChart(dates, prices) {
+export function loadResizedChart(dates, prices) {
     if(window.innerWidth <= 900 && window.innerWidth > 640) {
       loadChartWithData(dates, prices, 7);
     }
