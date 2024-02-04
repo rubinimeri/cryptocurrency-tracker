@@ -25,6 +25,14 @@ const config = function (dates, prices, numTicks) {
           pointRadius: 0,
           pointHitRadius: 10,
           pointHoverRadius: 0,
+          borderColor: (context) => {
+            const chart = context.chart;
+            const { ctx, chartArea, data, scales } = chart;
+            if (!chartArea) {
+              return null;
+            }
+            return getGradient(ctx, chartArea, data, scales);
+          },
         },
       ],
     },
