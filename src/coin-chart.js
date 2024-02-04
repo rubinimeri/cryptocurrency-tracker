@@ -99,6 +99,7 @@ const config = function (dates, prices, numTicks) {
         },
       },
     },
+    plugins: [dottedLine],
   };
 };
 
