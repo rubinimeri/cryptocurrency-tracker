@@ -138,3 +138,20 @@ function belowGradient(ctx, chartArea, data, scales) {
   gradientBackground.addColorStop(1, "rgb(230, 79, 66, 0.5)");
   return gradientBackground;
 }
+
+/*
+ * Add gradient above price line
+ */
+function aboveGradient(ctx, chartArea, data, scales) {
+  const { left, right, top, bottom, width, height } = chartArea;
+  const { x, y } = scales;
+  const gradientBackground = ctx.createLinearGradient(
+    0,
+    y.getPixelForValue(data.datasets[0].data[0]),
+    0,
+    top
+  );
+  gradientBackground.addColorStop(0, "rgb(111, 201, 132, 0)");
+  gradientBackground.addColorStop(1, "rgb(111, 201, 132, 0.5)");
+  return gradientBackground;
+}
