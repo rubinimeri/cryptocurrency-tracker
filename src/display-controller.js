@@ -1,3 +1,7 @@
+import moment from "moment";
+import { loadResizedChart} from "./coin-chart";
+import { historicalData } from "./fetch-data";
+
 // Show hamburger menu
 export function showMenu() {
     // When DOM content is loaded, add an event listener to
@@ -152,13 +156,14 @@ export function removeTableData() {
 // Dynamically loaded 'coin-details' section
 // when coin is clicked
 
-function loadCoinDetails() {
+async function loadCoinDetails() {
     const cryptoList = document.querySelector(".crypto-list");
     const pages = document.querySelector(".pages");
     const coinDetails = document.querySelector(".coin-details");
     coinDetails.classList.remove("display-none");
     cryptoList.classList.add("display-none");
     pages.classList.add("display-none");
+    await loadChart();
 }
 
 
@@ -167,4 +172,32 @@ function loadCoinDetails() {
 export function stopLoading() {
     const loader = document.querySelector(".loader");
     loader.classList.add("display-none");
+}
+
+async function loadChart() {
+    try {
+        const result = await historicalData();
+        const prices = result.map((price) => price[1]);
+        const dates = result.map((timee) =>
+          moment.unix(timee[0] / 1000).format("MM-DD-YYYY")
+        );
+        // Create chart
+        loadResizedChart(dates, prices);
+
+        window.addEventListener("resize", () => {
+          const chartContainer = document.querySelector(".chart-container");
+          const previousChart = document.getElementById("myChart");
+          const newChart = document.createElement("canvas");
+          newChart.id = "myChart";
+          previousChart.remove();
+          chartContainer.append(newChart);
+
+          // Recreate the chart with updated dimensions
+          loadResizedChart(dates, prices);
+        });
+
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
 }
