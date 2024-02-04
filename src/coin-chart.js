@@ -29,60 +29,74 @@ const config = function (dates, prices, numTicks) {
       ],
     },
     options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        layout: {
-          padding: {
-            left: 10,
-          },
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
         },
-        scales: {
-          x: {
-            grid: {
-              display: false,
-            },
-            ticks: {
-              maxTicksLimit: numTicks,
-              align: "start",
-              color: "gray",
-              font: {
-                weight: "bold",
-              },
-            },
-          },
-          y: {
-            ticks: {
-              maxTicksLimit: 7,
-              color: "gray",
-              font: {
-                weight: "bold",
-              },
-              callback: function (value) {
-                if (value >= 1000) return value / 1000 + "K";
-                return value;
-              },
-            },
-          },
-        },
-        plugins: {
-          legend: {
+      },
+      scales: {
+        x: {
+          grid: {
             display: false,
+          },
+          ticks: {
+            maxTicksLimit: numTicks,
+            align: "start",
+            color: "gray",
+            font: {
+              weight: "bold",
+            },
+          },
+        },
+        y: {
+          ticks: {
+            maxTicksLimit: 7,
+            color: "gray",
+            font: {
+              weight: "bold",
+            },
+            callback: function (value) {
+              if (value >= 1000) return value / 1000 + "K";
+              return value;
+            },
           },
         },
       },
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    },
   };
 };
 
 /*
  * Recreate the chart with updated properties depending on
  * window width
-*/
+ */
 export function loadResizedChart(dates, prices) {
-    if(window.innerWidth <= 900 && window.innerWidth > 640) {
-      loadChartWithData(dates, prices, 7);
-    }
-    else if(window.innerWidth <= 640) {
-      loadChartWithData(dates, prices, 4);
-    }
-    else loadChartWithData(dates, prices, 10);
-};
+  if (window.innerWidth <= 900 && window.innerWidth > 640) {
+    loadChartWithData(dates, prices, 7);
+  } else if (window.innerWidth <= 640) {
+    loadChartWithData(dates, prices, 4);
+  } else loadChartWithData(dates, prices, 10);
+}
+
+/*
+ * Add gradient to price
+ */
+// Add gradient to price
+function getGradient(ctx, chartArea, data, scales) {
+  const { left, right, top, bottom, width, height } = chartArea;
+  const { x, y } = scales;
+  const gradientBorder = ctx.createLinearGradient(0, 0, 0, bottom);
+  const shift = y.getPixelForValue(data.datasets[0].data[0]) / bottom;
+  gradientBorder.addColorStop(0, "rgb(111, 201, 132)");
+  gradientBorder.addColorStop(shift, "rgb(111, 201, 132)");
+  gradientBorder.addColorStop(shift, "rgb(230, 79, 66)");
+  gradientBorder.addColorStop(1, "rgb(230, 79, 66)");
+  return gradientBorder;
+}
