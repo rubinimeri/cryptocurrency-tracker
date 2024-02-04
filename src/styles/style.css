@@ -201,8 +201,16 @@ td:nth-child(2) {
 /* Coin details */
 
 .coin-details {
+    position: relative;
     display: flex;
     flex-direction: column;
-    flex: 0;
-    display: none;
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    align-self: center;
+    flex-grow: 1;
+}
+
+.chart-container {
+    height: 40vh;
 }
