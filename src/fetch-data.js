@@ -31,7 +31,7 @@ export async function coinWatch (coin) {
 /*
  * Get historical data for chart from CoinGecko API
  */
-async function historicalData(coin, currency, days) {
+export async function historicalData(coin, currency, days) {
   try {
     const response = await fetch(
       `https://api.coingecko.com/api/v3/coins/${coin || "bitcoin"}/market_chart?vs_currency=${currency || "usd"}&days=${days || "360"}`
