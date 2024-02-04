@@ -38,12 +38,12 @@ const config = function (dates, prices, numTicks) {
               return belowGradient(ctx, chartArea, data, scales);
             },
             above: (context) => {
-                const chart = context.chart;
-                const { ctx, chartArea, data, scales } = chart;
-                if (!chartArea) {
-                  return null;
-                }
-                return aboveGradient(ctx, chartArea, data, scales);
+              const chart = context.chart;
+              const { ctx, chartArea, data, scales } = chart;
+              if (!chartArea) {
+                return null;
+              }
+              return aboveGradient(ctx, chartArea, data, scales);
             },
           },
           borderColor: (context) => {
@@ -163,3 +163,46 @@ function aboveGradient(ctx, chartArea, data, scales) {
   gradientBackground.addColorStop(1, "rgb(111, 201, 132, 0.5)");
   return gradientBackground;
 }
+
+/*
+ * Plugin block to add dotted line to chart
+ */
+const dottedLine = {
+  id: "dottedLine",
+  beforeDatasetsDraw(chart, args, pluginOptions) {
+    const {
+      ctx,
+      data,
+      chartArea: { left, right, width },
+      scales: { x, y },
+    } = chart;
+
+    const startingPoint = data.datasets[0].data[0];
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.setLineDash([2, 5]);
+    ctx.strokeStyle = "rgba(102, 102, 102)";
+    ctx.moveTo(left, y.getPixelForValue(startingPoint));
+    ctx.lineTo(right, y.getPixelForValue(startingPoint));
+    ctx.stroke();
+    ctx.closePath();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(102, 102, 102)";
+    ctx.fillRect(0, y.getPixelForValue(startingPoint) - 10, left, 20);
+    ctx.closePath();
+
+    ctx.font = "bold 11px sans-serif";
+    ctx.fillStyle = "white";
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      startingPoint.toFixed(1),
+      left / 2,
+      y.getPixelForValue(startingPoint)
+    );
+  },
+};
