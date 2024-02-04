@@ -50,6 +50,19 @@ const config = function (dates, prices, numTicks) {
               },
             },
           },
+          y: {
+            ticks: {
+              maxTicksLimit: 7,
+              color: "gray",
+              font: {
+                weight: "bold",
+              },
+              callback: function (value) {
+                if (value >= 1000) return value / 1000 + "K";
+                return value;
+              },
+            },
+          },
         },
         plugins: {
           legend: {
