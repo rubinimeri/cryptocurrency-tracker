@@ -37,6 +37,14 @@ const config = function (dates, prices, numTicks) {
               }
               return belowGradient(ctx, chartArea, data, scales);
             },
+            above: (context) => {
+                const chart = context.chart;
+                const { ctx, chartArea, data, scales } = chart;
+                if (!chartArea) {
+                  return null;
+                }
+                return aboveGradient(ctx, chartArea, data, scales);
+            },
           },
           borderColor: (context) => {
             const chart = context.chart;
