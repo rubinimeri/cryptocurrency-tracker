@@ -25,6 +25,19 @@ const config = function (dates, prices, numTicks) {
           pointRadius: 0,
           pointHitRadius: 10,
           pointHoverRadius: 0,
+          fill: {
+            target: {
+              value: prices[0],
+            },
+            below: (context) => {
+              const chart = context.chart;
+              const { ctx, chartArea, data, scales } = chart;
+              if (!chartArea) {
+                return null;
+              }
+              return belowGradient(ctx, chartArea, data, scales);
+            },
+          },
           borderColor: (context) => {
             const chart = context.chart;
             const { ctx, chartArea, data, scales } = chart;
