@@ -49,17 +49,17 @@ export function checkPage() {
         });
 
         // Check which page we are in
-        if(currentPage === "/dist/index.html") {
+        if(currentPage.includes("index.html")) {
             // Set class to 'active'
             document.querySelector(".nav-link:first-child").classList.add("active");
             document.querySelector(".nav-link:first-child").firstChild.classList.add("active");
         }
-        else if (currentPage === "/dist/about.html")
+        else if (currentPage.includes("about.html"))
         {
             document.querySelector(".nav-link:nth-child(2)").classList.add("active");
             document.querySelector(".nav-link:nth-child(2)").firstChild.classList.add("active");
         }
-        else if (currentPage === "/dist/contact.html")
+        else if (currentPage.includes("contact.html"))
         {
             document.querySelector(".nav-link:nth-child(3)").classList.add("active");
             document.querySelector(".nav-link:nth-child(3)").firstChild.classList.add("active"); 
