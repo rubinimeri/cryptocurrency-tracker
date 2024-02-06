@@ -69,7 +69,7 @@ export function checkPage() {
 
 // Coin creator, takes information and will be used to
 // make a 'coin-card'
-export function coinCreator(number, logo, name, price, hour, day, marketCap, volume, circulatingSupply) {
+function coinCreator(number, logo, name, price, hour, day, marketCap, volume, circulatingSupply) {
     const table = document.querySelector(".crypto-list table");
     const row = document.createElement("tr");
     const logoElement = document.createElement("img");
