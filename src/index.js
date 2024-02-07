@@ -19,26 +19,28 @@ checkPage();
 
 let BTC = await coinWatch("BTC");
 let ETH = await coinWatch("ETH");
-let BNB = await coinWatch("BNB");
-let USDT = await coinWatch("USDT");
+let ADA = await coinWatch("ADA");
+let LINK = await coinWatch("LINK");
 let SOL = await coinWatch("SOL");
-let XRP = await coinWatch("XRP");
+let TRX = await coinWatch("TRX");
 
-coins.push(BTC, ETH, USDT, BNB, SOL, XRP);
+
+coins.push(BTC, ETH, ADA, LINK, SOL, TRX);
 
 console.log(coins);
 
 // Every 6 seconds, get new data from API
 setInterval(async () => {
-    BTC = await coinWatch("BTC");
-    ETH = await coinWatch("ETH");
-    BNB = await coinWatch("BNB");
-    USDT = await coinWatch("USDT");
-    SOL = await coinWatch("SOL");
-    XRP = await coinWatch("XRP");
+
+    let BTC = await coinWatch("BTC");
+    let ETH = await coinWatch("ETH");
+    let ADA = await coinWatch("ADA");
+    let LINK = await coinWatch("LINK");
+    let SOL = await coinWatch("SOL");
+    let TRX = await coinWatch("TRX");
 
     coins.splice(0, coins.length)
-    coins.push(BTC, ETH, USDT, BNB, SOL, XRP);
+    coins.push(BTC, ETH, ADA, LINK, SOL, TRX);
     removeTableData();
     addCoins(coins);
 }, 6000)

@@ -131,9 +131,9 @@ function addCommasToNumber(number) {
 // Use data from 'coins' array, to add coins to the DOM
 export async function addCoins(coins) {
 
-    coins.forEach(coin => {
+    coins.forEach((coin, index) => {
         // Adjust data
-        const rank = coin.rank;
+        const rank = index+1;
         const logo = coin.logo;
         const name = coin.name;
         const price = addCommasToNumber(coin.price);
