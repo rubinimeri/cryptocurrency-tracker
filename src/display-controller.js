@@ -76,7 +76,12 @@ function coinCreator(number, logo, name, price, hour, day, marketCap, volume, ci
     row.classList.add("table-row", "coin-info")
     table.append(row);
 
-    row.addEventListener("click", loadCoinDetails)
+    row.addEventListener("click", (e) => {
+        const coinContainer= e.target.parentNode;
+        const coinId = coinContainer.querySelector("td:nth-child(2) > span").textContent.toLowerCase();
+        console.log(coinId);
+        loadCoinDetails(coinId);
+    })
 
     for(let i = 0; i < 9; i++) {
         const data = arguments;
@@ -156,14 +161,14 @@ export function removeTableData() {
 // Dynamically loaded 'coin-details' section
 // when coin is clicked
 
-async function loadCoinDetails() {
+async function loadCoinDetails(coinId) {
     const cryptoList = document.querySelector(".crypto-list");
     const pages = document.querySelector(".pages");
     const coinDetails = document.querySelector(".coin-details");
     coinDetails.classList.remove("display-none");
     cryptoList.classList.add("display-none");
     pages.classList.add("display-none");
-    await loadChart();
+    await loadChart(coinId);
 }
 
 
@@ -174,9 +179,9 @@ export function stopLoading() {
     loader.classList.add("display-none");
 }
 
-async function loadChart() {
+async function loadChart(coinId) {
     try {
-        const result = await historicalData();
+        const result = await historicalData(coinId, "usd", 90);
         const prices = result.map((price) => price[1]);
         const dates = result.map((timee) =>
           moment.unix(timee[0] / 1000).format("MM-DD-YYYY")
