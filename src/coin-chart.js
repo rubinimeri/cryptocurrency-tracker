@@ -88,7 +88,7 @@ const config = function (dates, prices, numTicks) {
             },
             callback: function (value) {
               if (value >= 1000) return value / 1000 + "K";
-              return value;
+              return value.toFixed(2);
             },
           },
         },
