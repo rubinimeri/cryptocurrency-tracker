@@ -64,27 +64,23 @@ export function checkPage() {
 }
 
 async function loadChart(coinId) {
-  try {
-    const result = await historicalData(coinId, 'usd', 90);
-    const prices = result.map((price) => price[1]);
-    const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
-    // Create chart
+  const result = await historicalData(coinId, 'usd', 90);
+  const prices = result.map((price) => price[1]);
+  const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
+  // Create chart
+  loadResizedChart(dates, prices);
+
+  window.addEventListener('resize', () => {
+    const chartContainer = document.querySelector('.chart-container');
+    const previousChart = document.getElementById('myChart');
+    const newChart = document.createElement('canvas');
+    newChart.id = 'myChart';
+    previousChart.remove();
+    chartContainer.append(newChart);
+
+    // Recreate the chart with updated dimensions
     loadResizedChart(dates, prices);
-
-    window.addEventListener('resize', () => {
-      const chartContainer = document.querySelector('.chart-container');
-      const previousChart = document.getElementById('myChart');
-      const newChart = document.createElement('canvas');
-      newChart.id = 'myChart';
-      previousChart.remove();
-      chartContainer.append(newChart);
-
-      // Recreate the chart with updated dimensions
-      loadResizedChart(dates, prices);
-    });
-  } catch (error) {
-    console.error(error);
-  }
+  });
 }
 
 // Dynamically loaded 'coin-details' section

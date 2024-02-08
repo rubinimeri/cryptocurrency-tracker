@@ -41,15 +41,10 @@ export async function coinWatch(coin) {
  * Get historical data for chart from CoinGecko API
  */
 export async function historicalData(coin, currency, days) {
-  try {
-    const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/${coin || 'bitcoin'}/market_chart?vs_currency=${currency || 'usd'}&days=${days || '360'}`,
-    );
-    const data = await response.json();
+  const response = await fetch(
+    `https://api.coingecko.com/api/v3/coins/${coin || 'bitcoin'}/market_chart?vs_currency=${currency || 'usd'}&days=${days || '360'}`,
+  );
+  const data = await response.json();
 
-    return data.prices;
-  } catch (error) {
-    console.error('Error fetching data from API:', error.message);
-    throw error;
-  }
+  return data.prices;
 }
