@@ -166,7 +166,7 @@ export async function addCoins(coins) {
     const {
       logo, name, hour, day,
     } = coin;
-    const price = addCommasToNumber(coin.price);
+    const price = `$${addCommasToNumber(coin.price)}`;
     const marketCap = `$${addCommasToNumber(coin.marketCap)}`;
     const volume = `$${addCommasToNumber(coin.volume)}`;
     const circulatingSupply = addCommasToNumber(coin.circulatingSupply);
