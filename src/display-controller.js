@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { loadResizedChart } from './coin-chart';
 import { historicalData } from './fetch-data';
+import { coins } from './coin-data';
 
 // Show hamburger menu
 export function showMenu() {
@@ -63,12 +64,27 @@ export function checkPage() {
   });
 }
 
+// * Depending on which coin was clicked, search through
+// * coins array to find it and load it's data to the DOM
+function loadCoinData(coinId) {
+  const { logo, name, price } = coins.find((coin) => coin.name.toLowerCase() === coinId);
+  const coinLogo = document.querySelector('.coin-details img');
+  const coinName = document.querySelector('.coin-details h1');
+  const coinPrice = document.querySelector('.coin-details h3');
+
+  // * Load data
+  coinLogo.src = logo;
+  coinName.textContent = name;
+  coinPrice.textContent = price;
+}
+
 async function loadChart(coinId) {
   const result = await historicalData(coinId, 'usd', 90);
   const prices = result.map((price) => price[1]);
   const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
   // Create chart
   loadResizedChart(dates, prices);
+  loadCoinData(coinId);
 
   window.addEventListener('resize', () => {
     const chartContainer = document.querySelector('.chart-container');
@@ -96,6 +112,13 @@ async function loadCoinDetails(coinId) {
   await loadChart(coinId);
 }
 
+// Recurisve parent search
+
+function recursiveSearch(e) {
+  if (!e.classList.contains('table-row')) return recursiveSearch(e.parentNode);
+  return e;
+}
+
 // Coin creator, takes information and will be used to
 // make a 'coin-card'
 function coinCreator(...args) {
@@ -107,12 +130,7 @@ function coinCreator(...args) {
   table.append(row);
 
   row.addEventListener('click', (e) => {
-    let coinContainer;
-    if (!e.target.classList.contains('table-row')) {
-      coinContainer = e.target.parentNode.parentNode;
-    } else {
-      coinContainer = e.target.parentNode;
-    }
+    const coinContainer = recursiveSearch(e.target);
     const coinId = coinContainer.querySelector('td:nth-child(2) > span').textContent.toLowerCase();
     loadCoinDetails(coinId);
   });
