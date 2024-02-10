@@ -64,18 +64,30 @@ export function checkPage() {
   });
 }
 
+// Function that makes big numbers easier to
+// read
+function addCommasToNumber(number) {
+  // Convert the number to a string
+  let numString = number.toString();
+
+  // Use a regular expression to add commas
+  numString = numString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  return numString;
+}
+
 // * Depending on which coin was clicked, search through
 // * coins array to find it and load it's data to the DOM
 function loadCoinData(coinId) {
   const { logo, name, price } = coins.find((coin) => coin.name.toLowerCase() === coinId);
   const coinLogo = document.querySelector('.coin-details img');
-  const coinName = document.querySelector('.coin-details h1');
-  const coinPrice = document.querySelector('.coin-details h3');
+  const coinName = document.querySelector('.coin-details h3');
+  const coinPrice = document.querySelector('.coin-details h1');
 
   // * Load data
   coinLogo.src = logo;
   coinName.textContent = name;
-  coinPrice.textContent = price;
+  coinPrice.textContent = `$${addCommasToNumber(price)}`;
 }
 
 async function loadChart(coinId) {
@@ -106,9 +118,11 @@ async function loadCoinDetails(coinId) {
   const cryptoList = document.querySelector('.crypto-list');
   const pages = document.querySelector('.pages');
   const coinDetails = document.querySelector('.coin-details');
+  const h1 = document.querySelector('.hero-title');
   coinDetails.classList.remove('display-none');
   cryptoList.classList.add('display-none');
   pages.classList.add('display-none');
+  h1.classList.add('display-none');
   await loadChart(coinId);
 }
 
@@ -164,20 +178,8 @@ function coinCreator(...args) {
   }
 }
 
-// Function that makes big numbers easier to
-// read
-function addCommasToNumber(number) {
-  // Convert the number to a string
-  let numString = number.toString();
-
-  // Use a regular expression to add commas
-  numString = numString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  return numString;
-}
-
 // Use data from 'coins' array, to add coins to the DOM
-export async function addCoins(coins) {
+export async function addCoins() {
   coins.forEach((coin, index) => {
     // Adjust data
     const rank = index + 1;
