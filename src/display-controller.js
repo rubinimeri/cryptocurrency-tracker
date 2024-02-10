@@ -79,15 +79,32 @@ function addCommasToNumber(number) {
 // * Depending on which coin was clicked, search through
 // * coins array to find it and load it's data to the DOM
 function loadCoinData(coinId) {
-  const { logo, name, price } = coins.find((coin) => coin.name.toLowerCase() === coinId);
+  const {
+    logo, name, price, hour, day, marketCap, volume, circulatingSupply,
+  } = coins.find((coin) => coin.name.toLowerCase() === coinId);
   const coinLogo = document.querySelector('.coin-details img');
   const coinName = document.querySelector('.coin-details h3');
   const coinPrice = document.querySelector('.coin-details h1');
+  const otherData = document.querySelectorAll('.data');
+  const coinHour = otherData[0];
+  const coinDay = otherData[1];
+  const coinMarketCap = otherData[2];
+  const coinVolume = otherData[3];
+  const coinCircSupply = otherData[4];
 
   // * Load data
   coinLogo.src = logo;
   coinName.textContent = name;
   coinPrice.textContent = `$${addCommasToNumber(price)}`;
+  coinHour.textContent = hour;
+  coinDay.textContent = day;
+  coinMarketCap.textContent = `$${addCommasToNumber(marketCap)}`;
+  coinVolume.textContent = `$${addCommasToNumber(volume)}`;
+  coinCircSupply.textContent = `$${addCommasToNumber(circulatingSupply)}`;
+
+  // * Add classes
+  coinHour.classList.add(hour > 0 ? 'positive' : 'negative', 'percent');
+  coinDay.classList.add(day > 0 ? 'positive' : 'negative', 'percent');
 }
 
 async function loadChart(coinId) {
