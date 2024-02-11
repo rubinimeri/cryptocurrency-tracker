@@ -229,15 +229,17 @@ td:nth-child(2) {
     height: 40vh;
 }
 
-.other-data {
+.other-data,
+.delta,
+.other {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    grid-auto-rows: minmax(50px, auto);
+    grid-auto-rows: minmax(40px, auto);
     gap: 10px;
 }
 
-.other-data li {
+.other-data > div > div{
     display: flex;
     flex-direction: column;
     text-align: left;
