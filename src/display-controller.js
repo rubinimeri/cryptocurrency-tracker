@@ -117,14 +117,8 @@ function loadCoinData(coinId) {
   coinYear.classList.add(year > 0 ? 'positive' : 'negative', 'percent');
 }
 
-async function loadChart(coinId) {
-  const result = await historicalData(coinId, 'usd', 90);
-  const prices = result.map((price) => price[1]);
-  const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
-  // Create chart
-  loadResizedChart(dates, prices);
-  loadCoinData(coinId);
-
+// * On window resize, load a new chart
+function chartResize(dates, prices) {
   window.addEventListener('resize', () => {
     const chartContainer = document.querySelector('.chart-container');
     const previousChart = document.getElementById('myChart');
@@ -136,6 +130,17 @@ async function loadChart(coinId) {
     // Recreate the chart with updated dimensions
     loadResizedChart(dates, prices);
   });
+}
+
+async function loadChart(coinId) {
+  const result = await historicalData(coinId, 'usd', 90);
+  const prices = result.map((price) => price[1]);
+  const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
+  // Create chart
+  loadResizedChart(dates, prices);
+  loadCoinData(coinId);
+  // * Load new chart when window is resized
+  chartResize(dates, prices);
 }
 
 // Dynamically loaded 'coin-details' section
@@ -160,6 +165,15 @@ function recursiveSearch(e) {
   return e;
 }
 
+// Load chart when table-row is clicked
+function rowListener(row) {
+  row.addEventListener('click', (e) => {
+    const coinContainer = recursiveSearch(e.target);
+    const coinId = coinContainer.querySelector('td:nth-child(2) > span').textContent.toLowerCase();
+    loadCoinDetails(coinId);
+  });
+}
+
 // Coin creator, takes information and will be used to
 // make a 'coin-card'
 function coinCreator(...args) {
@@ -170,11 +184,8 @@ function coinCreator(...args) {
   row.classList.add('table-row', 'coin-info');
   table.append(row);
 
-  row.addEventListener('click', (e) => {
-    const coinContainer = recursiveSearch(e.target);
-    const coinId = coinContainer.querySelector('td:nth-child(2) > span').textContent.toLowerCase();
-    loadCoinDetails(coinId);
-  });
+  // * Load chart when table row is clicked
+  rowListener(row);
 
   for (let i = 0; i < 9; i += 1) {
     const td = document.createElement('td');
