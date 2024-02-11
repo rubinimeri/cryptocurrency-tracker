@@ -76,6 +76,15 @@ function addCommasToNumber(number) {
   return numString;
 }
 
+// * Get coin inside 'coins' array using it's ID
+function getCoin(coinId) {
+  const COIN = coins.find((coin) => coin.name.toLowerCase() === coinId);
+  if (!COIN) {
+    throw new Error(`Coin with id ${coinId} not found`);
+  }
+  return COIN;
+}
+
 // * Depending on which coin was clicked, search through
 // * coins array to find it and load it's data to the DOM
 function loadCoinData(coinId) {
@@ -84,7 +93,7 @@ function loadCoinData(coinId) {
     month,
     quarter,
     year,
-  } = coins.find((coin) => coin.name.toLowerCase() === coinId);
+  } = getCoin(coinId);
   const coinLogo = document.querySelector('.coin-details img');
   const coinName = document.querySelector('.coin-details h3');
   const coinPrice = document.querySelector('.coin-details h1');
@@ -133,7 +142,7 @@ function chartResize(dates, prices) {
 }
 
 async function loadChart(coinId) {
-  const result = await historicalData(coinId, 'usd', 90);
+  const result = await historicalData(coinId, 'usd', 1);
   const prices = result.map((price) => price[1]);
   const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
   // Create chart
@@ -217,7 +226,7 @@ function coinCreator(...args) {
 }
 
 // Use data from 'coins' array, to add coins to the DOM
-export async function addCoins() {
+export function addCoins() {
   coins.forEach((coin, index) => {
     // Adjust data
     const rank = index + 1;
