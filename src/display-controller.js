@@ -80,17 +80,18 @@ function addCommasToNumber(number) {
 // * coins array to find it and load it's data to the DOM
 function loadCoinData(coinId) {
   const {
-    logo, name, price, hour, day, marketCap, volume, circulatingSupply,
+    logo, name, price, hour, day, marketCap, volume, circulatingSupply, liquidity, week,
+    month,
+    quarter,
+    year,
   } = coins.find((coin) => coin.name.toLowerCase() === coinId);
   const coinLogo = document.querySelector('.coin-details img');
   const coinName = document.querySelector('.coin-details h3');
   const coinPrice = document.querySelector('.coin-details h1');
   const otherData = document.querySelectorAll('.data');
-  const coinHour = otherData[0];
-  const coinDay = otherData[1];
-  const coinMarketCap = otherData[2];
-  const coinVolume = otherData[3];
-  const coinCircSupply = otherData[4];
+
+  const [coinHour, coinDay, coinWeek, coinMonth, coinQuarter, coinYear, coinMarketCap,
+    coinVolume, coinCircSupply, coinLiquidity] = otherData;
 
   // * Load data
   coinLogo.src = logo;
@@ -98,13 +99,22 @@ function loadCoinData(coinId) {
   coinPrice.textContent = `$${addCommasToNumber(price)}`;
   coinHour.textContent = hour;
   coinDay.textContent = day;
+  coinWeek.textContent = week;
+  coinMonth.textContent = month;
+  coinYear.textContent = year;
+  coinQuarter.textContent = quarter;
   coinMarketCap.textContent = `$${addCommasToNumber(marketCap)}`;
   coinVolume.textContent = `$${addCommasToNumber(volume)}`;
   coinCircSupply.textContent = `$${addCommasToNumber(circulatingSupply)}`;
+  coinLiquidity.textContent = `$${addCommasToNumber(liquidity)}`;
 
   // * Add classes
   coinHour.classList.add(hour > 0 ? 'positive' : 'negative', 'percent');
   coinDay.classList.add(day > 0 ? 'positive' : 'negative', 'percent');
+  coinWeek.classList.add(week > 0 ? 'positive' : 'negative', 'percent');
+  coinMonth.classList.add(month > 0 ? 'positive' : 'negative', 'percent');
+  coinQuarter.classList.add(quarter > 0 ? 'positive' : 'negative', 'percent');
+  coinYear.classList.add(year > 0 ? 'positive' : 'negative', 'percent');
 }
 
 async function loadChart(coinId) {
