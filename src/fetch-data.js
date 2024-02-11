@@ -29,6 +29,11 @@ export async function coinWatch(coin) {
       data.cap,
       data.volume,
       data.totalSupply,
+      data.liquidity,
+      data.delta.week,
+      data.delta.month,
+      data.delta.quarter,
+      data.delta.year,
     );
 
     return dataObj;

@@ -1,6 +1,21 @@
 // Create Coin objects
 
-export function Coin(rank, logo, name, price, hour, day, marketCap, volume, circulatingSupply, liquidity, week, month, quarter, year) {
+export function Coin(
+  rank,
+  logo,
+  name,
+  price,
+  hour,
+  day,
+  marketCap,
+  volume,
+  circulatingSupply,
+  liquidity,
+  week,
+  month,
+  quarter,
+  year,
+) {
   return {
     rank,
     logo,
