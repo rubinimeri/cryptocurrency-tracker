@@ -216,11 +216,9 @@ function coinCreator(...args) {
 
     // Add classes
     if ((i === 4 || i === 5) && parseFloat(span.textContent) > 0) {
-      span.classList.add('positive');
-      span.classList.add('percent');
+      span.classList.add('positive', 'percent');
     } else if ((i === 4 || i === 5) && parseFloat(span.textContent) < 0) {
-      span.classList.add('negative');
-      span.classList.add('percent');
+      span.classList.add('negative', 'percent');
     }
   }
 }
