@@ -218,6 +218,15 @@ td:nth-child(2) {
     gap: 8px;
 }
 
+.data-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+}
+
 .name-container {
     display: flex;
     align-items: center;
