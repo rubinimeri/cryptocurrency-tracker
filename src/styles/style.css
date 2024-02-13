@@ -234,6 +234,33 @@ td:nth-child(2) {
     align-self: center;
 }
 
+.timeframe-container {
+    background-color: var(--border-color);
+    padding: 4px;
+    border-radius: 8px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.timeframe-container label {
+    flex-grow: 1;
+    padding: 6px;
+    cursor: pointer;
+    color: #777779;
+    font-weight: 600;
+}
+
+.checked {
+    background-color: #fff;
+    border-radius: 8px;
+}
+
 .chart-container {
     height: 40vh;
 }
