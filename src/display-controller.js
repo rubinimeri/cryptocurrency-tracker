@@ -271,7 +271,7 @@ export function stopLoading() {
 export function timeFrameSelector() {
   const timeFrames = Array.from(document.querySelectorAll('input[type="radio"]'));
   timeFrames.forEach((timeframe) => {
-    timeframe.addEventListener('change', () => {
+    timeframe.addEventListener('change', function () {
       const selectedCoin = getCoin(coinId).name.toLowerCase();
       const selectedTimeFrameValue = this.value;
       removeChart();
