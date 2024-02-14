@@ -126,23 +126,28 @@ function loadCoinData(coinId) {
   coinYear.classList.add(year > 0 ? 'positive' : 'negative', 'percent');
 }
 
+// * Remove current chart and create a new one
+function removeChart() {
+  const chartContainer = document.querySelector('.chart-container');
+  const previousChart = document.getElementById('myChart');
+  const newChart = document.createElement('canvas');
+  newChart.id = 'myChart';
+  previousChart.remove();
+  chartContainer.append(newChart);
+}
+
 // * On window resize, load a new chart
 function chartResize(dates, prices) {
   window.addEventListener('resize', () => {
-    const chartContainer = document.querySelector('.chart-container');
-    const previousChart = document.getElementById('myChart');
-    const newChart = document.createElement('canvas');
-    newChart.id = 'myChart';
-    previousChart.remove();
-    chartContainer.append(newChart);
+    removeChart();
 
     // Recreate the chart with updated dimensions
     loadResizedChart(dates, prices);
   });
 }
 
-async function loadChart(coinId) {
-  const result = await historicalData(coinId, 'usd', 1);
+async function loadChart(coinId, days = 1) {
+  const result = await historicalData(coinId, 'usd', days);
   const prices = result.map((price) => price[1]);
   const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
   // Create chart
@@ -174,11 +179,14 @@ function recursiveSearch(e) {
   return e;
 }
 
+// * Current selected coin
+let coinId;
+
 // Load chart when table-row is clicked
 function rowListener(row) {
   row.addEventListener('click', (e) => {
     const coinContainer = recursiveSearch(e.target);
-    const coinId = coinContainer.querySelector('td:nth-child(2) > span').textContent.toLowerCase();
+    coinId = coinContainer.querySelector('td:nth-child(2) > span').textContent.toLowerCase();
     loadCoinDetails(coinId);
   });
 }
@@ -256,4 +264,33 @@ export function removeTableData() {
 export function stopLoading() {
   const loader = document.querySelector('.loader');
   loader.classList.add('display-none');
+}
+
+// * Add event listener to timeframe radio buttons
+// * and load a new chart based on the selected timeframe
+export function timeFrameSelector() {
+  const timeFrames = Array.from(document.querySelectorAll('input[type="radio"]'));
+  timeFrames.forEach((timeframe) => {
+    timeframe.addEventListener('change', () => {
+      const selectedCoin = getCoin(coinId).name.toLowerCase();
+      const selectedTimeFrameValue = this.value;
+      removeChart();
+
+      // * Add and remove classes/attributes
+      timeFrames.forEach((timeFrame) => {
+        if (timeFrame.hasAttribute('checked')) {
+          timeframe.removeAttribute('checked');
+          timeFrame.parentNode.classList.remove('checked');
+        }
+      });
+      timeframe.setAttribute('checked', true);
+      timeframe.parentNode.classList.add('checked');
+
+      if (selectedTimeFrameValue === 'day') loadChart(selectedCoin);
+      if (selectedTimeFrameValue === 'week') loadChart(selectedCoin, 7);
+      if (selectedTimeFrameValue === 'month') loadChart(selectedCoin, 30);
+      if (selectedTimeFrameValue === 'quarter') loadChart(selectedCoin, 90);
+      if (selectedTimeFrameValue === 'year') loadChart(selectedCoin, 365);
+    });
+  });
 }
