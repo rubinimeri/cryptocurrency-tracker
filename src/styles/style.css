@@ -252,13 +252,18 @@ input[type="radio"] {
     flex-grow: 1;
     padding: 6px;
     cursor: pointer;
+    font-size: 12px;
     color: #777779;
-    font-weight: 600;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+.timeframe-container label:hover {
+    background-color: #F8FAFD;
 }
 
 .checked {
     background-color: #fff;
-    border-radius: 8px;
 }
 
 .chart-container {
