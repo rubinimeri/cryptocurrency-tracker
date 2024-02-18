@@ -227,6 +227,10 @@ nav {
         padding-bottom: 0.8rem;
         
     }
+    .dark-mode .bottom-nav div {
+    border-bottom: 1px solid var(--dark-border);
+
+    }
     .bottom-nav div a {
         align-self: flex-end;
     }
