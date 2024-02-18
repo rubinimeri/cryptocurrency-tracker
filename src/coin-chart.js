@@ -193,7 +193,7 @@ const config = (dates, prices, numTicks) => ({
       },
       crosshair: {
         line: {
-          color: '#000000',
+          color: 'gray',
           width: 0.5,
           dashPattern: [2, 5],
         },

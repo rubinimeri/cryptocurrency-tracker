@@ -43,14 +43,14 @@ nav {
     vertical-align: middle;
 }
 
-.dark {
+.toggler {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
-.dark svg {
+.toggler svg {
     height: 20px;
     width: 20px;
 }

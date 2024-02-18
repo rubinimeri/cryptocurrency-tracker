@@ -48,6 +48,13 @@ header.dark-mode a {
     fill: #A0A0A0;
 }
 
+.dark-mode .login {
+    color: var(--primary-color);
+}
+
+.light {
+    fill: white;
+}
 
 .dark-mode .search-container,
 .dark-mode .select-container {
@@ -83,5 +90,17 @@ header.dark-mode a {
 }
 
 .dark-mode .pages svg {
+    fill: white;
+}
+
+.dark-mode .pages p:hover {
+    background-color: var(--row-hover-bgc);
+}
+
+.dark-mode footer a {
+    color: white;
+}
+
+.dark-mode footer svg {
     fill: white;
 }

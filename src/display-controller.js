@@ -4,6 +4,7 @@ import {
 } from './coin-chart';
 import { historicalData } from './fetch-data';
 import { coins } from './coin-data';
+import './assets/logo-light.png';
 
 // Show hamburger menu
 export function showMenu() {
@@ -62,6 +63,59 @@ export function checkPage() {
     } else if (currentPage.includes('contact.html')) {
       document.querySelector('.nav-link:nth-child(3)').classList.add('active');
       document.querySelector('.nav-link:nth-child(3)').firstChild.classList.add('active');
+    }
+  });
+}
+
+// * Toggle dark mode when dark icon is clicked
+export function toggleDarkMode() {
+  const toggler = document.querySelector('.toggler');
+  const body = document.querySelector('body');
+  const header = body.querySelector('header');
+  const footer = body.querySelector('footer');
+  const container = body.querySelector('.container');
+  const headerLogo = document.querySelector('.logo-container img');
+  const footerLogo = document.querySelector('footer img');
+  const lightLogo = './83add02974a09868b30e.png';
+  const darkLogo = './82ce140b93c72bd10f68.png';
+  const light = toggler.querySelector('.light');
+  const dark = toggler.querySelector('.dark');
+  if (localStorage.getItem('darkMode') === 'true') {
+    // Change logo
+    headerLogo.src = lightLogo;
+    footerLogo.src = lightLogo;
+
+    // Change icon to light theme
+    light.classList.remove('display-none');
+    dark.classList.add('display-none');
+
+    // Add classes
+    body.classList.add('dark-mode');
+    header.classList.add('dark-mode');
+    container.classList.add('dark-mode');
+    footer.classList.add('dark-mode');
+  }
+  toggler.addEventListener('click', () => {
+    if (body.classList.contains('dark-mode')) {
+      light.classList.add('display-none');
+      dark.classList.remove('display-none');
+      headerLogo.src = darkLogo;
+      footerLogo.src = darkLogo;
+      body.classList.remove('dark-mode');
+      header.classList.remove('dark-mode');
+      footer.classList.remove('dark-mode');
+      container.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', false);
+    } else {
+      light.classList.remove('display-none');
+      dark.classList.add('display-none');
+      headerLogo.src = lightLogo;
+      footerLogo.src = lightLogo;
+      body.classList.add('dark-mode');
+      header.classList.add('dark-mode');
+      container.classList.add('dark-mode');
+      footer.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'true');
     }
   });
 }
