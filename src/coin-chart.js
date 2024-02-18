@@ -1,4 +1,10 @@
-import Chart from 'chart.js/auto';
+import Chart, { Interaction } from 'chart.js/auto';
+import { CrosshairPlugin, Interpolate } from 'chartjs-plugin-crosshair';
+
+Chart.register(CrosshairPlugin);
+Interaction.modes.interpolate = Interpolate;
+
+export let myChart;
 
 /*
  * Add gradient to price
@@ -105,8 +111,8 @@ const config = (dates, prices, numTicks) => ({
         data: prices,
         borderWidth: 2,
         pointRadius: 0,
-        pointHitRadius: 10,
-        pointHoverRadius: 0,
+        pointHitRadius: 0,
+        pointHoverRadius: 2,
         fill: {
           target: {
             value: prices[0],
@@ -185,6 +191,49 @@ const config = (dates, prices, numTicks) => ({
       legend: {
         display: false,
       },
+      crosshair: {
+        line: {
+          color: '#000000',
+          width: 0.5,
+          dashPattern: [2, 5],
+        },
+      },
+      zoom: {
+        enabled: false,
+      },
+      tooltip: {
+        enabled: true,
+        mode: 'index',
+        intersect: false,
+        animation: {
+          duration: 0,
+        },
+        position: 'nearest', // Set the position mode
+        custom(tooltipModel) {
+          // Tooltip position adjustment
+          const position = this._chart.canvas.getBoundingClientRect();
+          const mouseX = tooltipModel.caretX;
+          const distanceToLeftEdge = mouseX - 20; // Adjust this value as needed
+
+          // Set the tooltip position
+          tooltipModel.x = position.left + distanceToLeftEdge;
+
+          // Optional: Adjust the y-position if needed
+          tooltipModel.y = position.top + tooltipModel.caretY;
+
+          // Ensure the tooltip is visible within the chart area
+          if (tooltipModel.x < position.left) {
+            tooltipModel.x = position.left;
+          }
+
+          // Ensure the tooltip is visible within the chart area
+          if (tooltipModel.y < position.top) {
+            tooltipModel.y = position.top;
+          }
+
+          return tooltipModel;
+        },
+      },
     },
   },
   plugins: [dottedLine],
@@ -193,19 +242,25 @@ const config = (dates, prices, numTicks) => ({
 /*
  * Function that selects canvas from HTML and loads chart
  */
-export async function loadChartWithData(dates, prices, numTicks) {
+export function loadChartWithData(dates, prices, numTicks) {
   const ctx = document.getElementById('myChart');
-  return new Chart(ctx, config(dates, prices, numTicks));
+  myChart = new Chart(ctx, config(dates, prices, numTicks));
 }
 
 /*
  * Recreate the chart with updated properties depending on
  * window width
  */
-export function loadResizedChart(dates, prices) {
+export function loadResizedChart() {
   if (window.innerWidth <= 900 && window.innerWidth > 640) {
-    loadChartWithData(dates, prices, 7);
+    myChart.config.options.scales.x.ticks.maxTicksLimit = 7;
   } else if (window.innerWidth <= 640) {
-    loadChartWithData(dates, prices, 4);
-  } else loadChartWithData(dates, prices, 10);
+    myChart.config.options.scales.x.ticks.maxTicksLimit = 4;
+  } else myChart.config.options.scales.x.ticks.maxTicksLimit = 10;
+}
+
+// * Change chart data
+export function changeChartData(dates, prices) {
+  myChart.destroy();
+  loadChartWithData(dates, prices, 4);
 }
