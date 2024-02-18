@@ -1,0 +1,87 @@
+:root {
+    --dark-bgc: #0c1421;
+    --dark-border: rgb(50, 53, 70);
+    --dark-border-text: #A1A7BB;
+    --row-hover-bgc: #222531;
+}
+
+.dark-mode {
+    color: white;
+}
+
+.dark-mode,
+.dark-mode .select-box,
+.dark-mode .bottom-nav,
+.dark-mode th {
+    background-color: var(--dark-bgc);
+}
+
+.dark-mode th {
+    border-top: 1px solid var(--dark-border);
+}
+
+.dark-mode .table-row:hover {
+    background-color: var(--row-hover-bgc);
+}
+
+.dark-mode .top-nav,
+.dark-mode .bottom-nav,
+.dark-mode .table-row {
+    border-bottom: 1px solid var(--dark-border);
+}
+
+.dark-mode .select-box,
+header.dark-mode a {
+    color: white;
+}
+
+.dark-mode .select-container svg {
+    fill: white;
+}
+
+.dark-mode .search-container,
+.dark-mode .search-container input {
+    background-color: var(--dark-border);
+}
+
+.dark-mode .hamburger svg {
+    fill: #A0A0A0;
+}
+
+
+.dark-mode .search-container,
+.dark-mode .select-container {
+    border: none;
+}
+
+.dark-mode::-webkit-scrollbar-thumb {
+    background-color: var(--dark-border);
+}
+
+.dark-mode .other-data > div > div {
+    background-color: var(--dark-border);
+}
+
+.dark-mode .data-name {
+    color: var(--dark-border-text);
+}
+
+.dark-mode .timeframe-container {
+    background-color: var(--dark-border);
+}
+
+.dark-mode .timeframe-container label {
+    color: var(--dark-border-text);
+}
+
+.dark-mode .timeframe-container label:hover {
+    background-color: var(--row-hover-bgc);
+}
+
+.dark-mode .checked {
+    background-color: var(--dark-bgc);
+}
+
+.dark-mode .pages svg {
+    fill: white;
+}
