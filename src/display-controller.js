@@ -1,5 +1,7 @@
 import moment from 'moment';
-import { loadResizedChart } from './coin-chart';
+import {
+  changeChartData, loadChartWithData, loadResizedChart, myChart,
+} from './coin-chart';
 import { historicalData } from './fetch-data';
 import { coins } from './coin-data';
 
@@ -126,35 +128,23 @@ function loadCoinData(coinId) {
   coinYear.classList.add(year > 0 ? 'positive' : 'negative', 'percent');
 }
 
-// * Remove current chart and create a new one
-function removeChart() {
-  const chartContainer = document.querySelector('.chart-container');
-  const previousChart = document.getElementById('myChart');
-  const newChart = document.createElement('canvas');
-  newChart.id = 'myChart';
-  previousChart.remove();
-  chartContainer.append(newChart);
-}
-
-// * On window resize, load a new chart
-function chartResize(dates, prices) {
-  window.addEventListener('resize', () => {
-    removeChart();
-
-    // Recreate the chart with updated dimensions
-    loadResizedChart(dates, prices);
-  });
-}
-
-async function loadChart(coinId, days = 1) {
+// * Get coin dates and prices
+async function getCoinData(coinId, days) {
   const result = await historicalData(coinId, 'usd', days);
   const prices = result.map((price) => price[1]);
   const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
+  return [dates, prices];
+}
+
+async function loadChart(coinId, days = 1) {
+  const [dates, prices] = await getCoinData(coinId, days);
   // Create chart
-  loadResizedChart(dates, prices);
+  loadChartWithData(dates, prices, 10);
   loadCoinData(coinId);
-  // * Load new chart when window is resized
-  chartResize(dates, prices);
+
+  window.addEventListener('resize', () => {
+    loadResizedChart(myChart);
+  });
 }
 
 // Dynamically loaded 'coin-details' section
@@ -271,10 +261,10 @@ export function stopLoading() {
 export function timeFrameSelector() {
   const timeFrames = Array.from(document.querySelectorAll('input[type="radio"]'));
   timeFrames.forEach((timeframe) => {
-    timeframe.addEventListener('change', function () {
-      const selectedCoin = getCoin(coinId).name.toLowerCase();
+    timeframe.addEventListener('change', async function () {
       const selectedTimeFrameValue = this.value;
-      removeChart();
+      let dates; let
+        prices;
 
       // * Add and remove classes/attributes
       timeFrames.forEach((timeFrame) => {
@@ -286,11 +276,22 @@ export function timeFrameSelector() {
       timeframe.setAttribute('checked', true);
       timeframe.parentNode.classList.add('checked');
 
-      if (selectedTimeFrameValue === 'day') loadChart(selectedCoin);
-      if (selectedTimeFrameValue === 'week') loadChart(selectedCoin, 7);
-      if (selectedTimeFrameValue === 'month') loadChart(selectedCoin, 30);
-      if (selectedTimeFrameValue === 'quarter') loadChart(selectedCoin, 90);
-      if (selectedTimeFrameValue === 'year') loadChart(selectedCoin, 365);
+      if (selectedTimeFrameValue === 'day') {
+        [dates, prices] = await getCoinData(coinId, 1);
+      }
+      if (selectedTimeFrameValue === 'week') {
+        [dates, prices] = await getCoinData(coinId, 7);
+      }
+      if (selectedTimeFrameValue === 'month') {
+        [dates, prices] = await getCoinData(coinId, 30);
+      }
+      if (selectedTimeFrameValue === 'quarter') {
+        [dates, prices] = await getCoinData(coinId, 90);
+      }
+      if (selectedTimeFrameValue === 'year') {
+        [dates, prices] = await getCoinData(coinId, 365);
+      }
+      changeChartData(dates, prices);
     });
   });
 }

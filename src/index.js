@@ -18,17 +18,17 @@ checkPage();
 
 // Logic
 
-const BTC = await coinWatch('BTC');
-const ETH = await coinWatch('ETH');
-const ADA = await coinWatch('ADA');
-const LINK = await coinWatch('LINK');
-const SOL = await coinWatch('SOL');
-const TRX = await coinWatch('TRX');
+let BTC = await coinWatch('BTC');
+let ETH = await coinWatch('ETH');
+let ADA = await coinWatch('ADA');
+let LINK = await coinWatch('LINK');
+let SOL = await coinWatch('SOL');
+let TRX = await coinWatch('TRX');
 
 coins.push(BTC, ETH, ADA, LINK, SOL, TRX);
 
 // Every 6 seconds, get new data from API
-/* setInterval(async () => {
+setInterval(async () => {
   BTC = await coinWatch('BTC');
   ETH = await coinWatch('ETH');
   ADA = await coinWatch('ADA');
@@ -40,7 +40,7 @@ coins.push(BTC, ETH, ADA, LINK, SOL, TRX);
   coins.push(BTC, ETH, ADA, LINK, SOL, TRX);
   removeTableData();
   addCoins(coins);
-}, 6000); */
+}, 6000);
 
 // Add coins to DOM
 
