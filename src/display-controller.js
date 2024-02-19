@@ -132,6 +132,23 @@ function addCommasToNumber(number) {
   return numString;
 }
 
+// * Update container height
+export function updateContainerHeight() {
+  const container = document.querySelector('.container');
+  if (window.innerWidth <= 614) {
+    container.style.minHeight = '120vh';
+  } else {
+    container.style.minHeight = '90vh';
+  }
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 614) {
+      container.style.minHeight = '120vh';
+    } else {
+      container.style.minHeight = '90vh';
+    }
+  });
+}
+
 // * Get coin inside 'coins' array using it's ID
 function getCoin(coinId) {
   const COIN = coins.find((coin) => coin.name.toLowerCase() === coinId);

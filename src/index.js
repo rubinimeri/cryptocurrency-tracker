@@ -6,7 +6,9 @@ import './styles/contact.css';
 import './assets/logo-dark.png';
 import './styles/dark-mode.css';
 import {
-  showMenu, moveSearchSelect, checkPage, addCoins, removeTableData, stopLoading, timeFrameSelector, toggleDarkMode,
+  showMenu, moveSearchSelect, checkPage, addCoins,
+  removeTableData, stopLoading, timeFrameSelector, toggleDarkMode,
+  updateContainerHeight,
 } from './display-controller';
 import { coins } from './coin-data';
 import { coinWatch } from './fetch-data';
@@ -16,6 +18,7 @@ moveSearchSelect();
 window.addEventListener('resize', moveSearchSelect);
 window.addEventListener('DOMContentLoaded', timeFrameSelector);
 window.addEventListener('DOMContentLoaded', toggleDarkMode);
+updateContainerHeight();
 checkPage();
 
 // Logic
