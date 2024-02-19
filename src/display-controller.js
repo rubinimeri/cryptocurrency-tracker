@@ -170,7 +170,7 @@ function loadCoinData(coinId) {
   coinQuarter.textContent = quarter;
   coinMarketCap.textContent = `$${addCommasToNumber(marketCap)}`;
   coinVolume.textContent = `$${addCommasToNumber(volume)}`;
-  coinCircSupply.textContent = `$${addCommasToNumber(circulatingSupply)}`;
+  coinCircSupply.textContent = addCommasToNumber(circulatingSupply);
   coinLiquidity.textContent = `$${addCommasToNumber(liquidity)}`;
 
   // * Add classes
