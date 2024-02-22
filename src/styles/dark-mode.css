@@ -5,14 +5,19 @@
     --row-hover-bgc: #222531;
 }
 
-.dark-mode {
+.dark-mode,
+.dark-mode header a {
     color: white;
 }
 
 .dark-mode,
 .dark-mode .select-box,
 .dark-mode .bottom-nav,
-.dark-mode th {
+.dark-mode th,
+.dark-mode .about-section,
+.dark-mode footer,
+.dark-mode .container,
+.dark-mode .header {
     background-color: var(--dark-bgc);
 }
 
@@ -30,8 +35,7 @@
     border-bottom: 1px solid var(--dark-border);
 }
 
-.dark-mode .select-box,
-header.dark-mode a {
+.dark-mode .select-box {
     color: white;
 }
 
@@ -103,4 +107,17 @@ header.dark-mode a {
 
 .dark-mode footer svg {
     fill: white;
+}
+
+.dark-mode .layer1,
+.dark-mode .layer2 {
+    background: url(../assets/wave-black.svg);
+}
+
+.dark-mode .spacer {
+    aspect-ratio: 900/200;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
