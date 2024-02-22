@@ -315,6 +315,8 @@ export function removeTableData() {
 // when coins are loaded
 export function stopLoading() {
   const loader = document.querySelector('.loader');
+  const table = document.querySelector('table');
+  table.classList.remove('display-none');
   loader.classList.add('display-none');
 }
 
