@@ -71,9 +71,6 @@ export function checkPage() {
 export function toggleDarkMode() {
   const toggler = document.querySelector('.toggler');
   const body = document.querySelector('body');
-  const header = body.querySelector('header');
-  const footer = body.querySelector('footer');
-  const container = body.querySelector('.container');
   const headerLogo = document.querySelector('.logo-container img');
   const footerLogo = document.querySelector('footer img');
   const lightLogo = './83add02974a09868b30e.png';
@@ -89,11 +86,8 @@ export function toggleDarkMode() {
     light.classList.remove('display-none');
     dark.classList.add('display-none');
 
-    // Add classes
+    // Add class
     body.classList.add('dark-mode');
-    header.classList.add('dark-mode');
-    container.classList.add('dark-mode');
-    footer.classList.add('dark-mode');
   }
   toggler.addEventListener('click', () => {
     if (body.classList.contains('dark-mode')) {
@@ -102,9 +96,6 @@ export function toggleDarkMode() {
       headerLogo.src = darkLogo;
       footerLogo.src = darkLogo;
       body.classList.remove('dark-mode');
-      header.classList.remove('dark-mode');
-      footer.classList.remove('dark-mode');
-      container.classList.remove('dark-mode');
       localStorage.setItem('darkMode', false);
     } else {
       light.classList.remove('display-none');
@@ -112,9 +103,6 @@ export function toggleDarkMode() {
       headerLogo.src = lightLogo;
       footerLogo.src = lightLogo;
       body.classList.add('dark-mode');
-      header.classList.add('dark-mode');
-      container.classList.add('dark-mode');
-      footer.classList.add('dark-mode');
       localStorage.setItem('darkMode', 'true');
     }
   });
