@@ -20,33 +20,36 @@ window.addEventListener('DOMContentLoaded', timeFrameSelector);
 window.addEventListener('DOMContentLoaded', toggleDarkMode);
 checkPage();
 
+// * Check if we are on the homepage, if so load the coins
+if (window.location.pathname.includes('index.html')) {
 // Logic
 
-let BTC = await coinWatch('BTC');
-let ETH = await coinWatch('ETH');
-let ADA = await coinWatch('ADA');
-let LINK = await coinWatch('LINK');
-let SOL = await coinWatch('SOL');
-let TRX = await coinWatch('TRX');
+  let BTC = await coinWatch('BTC');
+  let ETH = await coinWatch('ETH');
+  let ADA = await coinWatch('ADA');
+  let LINK = await coinWatch('LINK');
+  let SOL = await coinWatch('SOL');
+  let TRX = await coinWatch('TRX');
 
-coins.push(BTC, ETH, ADA, LINK, SOL, TRX);
-
-// Every 6 seconds, get new data from API
-setInterval(async () => {
-  BTC = await coinWatch('BTC');
-  ETH = await coinWatch('ETH');
-  ADA = await coinWatch('ADA');
-  LINK = await coinWatch('LINK');
-  SOL = await coinWatch('SOL');
-  TRX = await coinWatch('TRX');
-
-  coins.splice(0, coins.length);
   coins.push(BTC, ETH, ADA, LINK, SOL, TRX);
-  removeTableData();
+
+  // Every 6 seconds, get new data from API
+  setInterval(async () => {
+    BTC = await coinWatch('BTC');
+    ETH = await coinWatch('ETH');
+    ADA = await coinWatch('ADA');
+    LINK = await coinWatch('LINK');
+    SOL = await coinWatch('SOL');
+    TRX = await coinWatch('TRX');
+
+    coins.splice(0, coins.length);
+    coins.push(BTC, ETH, ADA, LINK, SOL, TRX);
+    removeTableData();
+    addCoins(coins);
+  }, 6000);
+
+  // Add coins to DOM
+
+  stopLoading();
   addCoins(coins);
-}, 6000);
-
-// Add coins to DOM
-
-stopLoading();
-addCoins(coins);
+}
