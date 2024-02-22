@@ -6,8 +6,14 @@
 }
 
 .dark-mode,
-.dark-mode header a {
+.dark-mode header a,
+.dark-mode input[type="search"] {
     color: white;
+}
+
+.dark-mode .car,
+.dark-mode .track {
+    stroke: white;
 }
 
 .dark-mode,

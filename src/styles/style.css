@@ -70,7 +70,9 @@ a {
 .loader {
     height: 100%;
     width: 100vw;
-    background: white url(../assets/loading.gif) no-repeat center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 2;
 }
 
