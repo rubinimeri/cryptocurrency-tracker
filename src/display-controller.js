@@ -134,19 +134,21 @@ function addCommasToNumber(number) {
 
 // * Update container height
 export function updateContainerHeight() {
-  const container = document.querySelector('.container');
-  if (window.innerWidth <= 614) {
-    container.style.minHeight = '120vh';
-  } else {
-    container.style.minHeight = '90vh';
-  }
-  window.addEventListener('resize', () => {
+  if (window.location.pathname.includes('index.html')) {
+    const container = document.querySelector('.container');
     if (window.innerWidth <= 614) {
       container.style.minHeight = '120vh';
     } else {
       container.style.minHeight = '90vh';
     }
-  });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 614) {
+        container.style.minHeight = '120vh';
+      } else {
+        container.style.minHeight = '90vh';
+      }
+    });
+  }
 }
 
 // * Get coin inside 'coins' array using it's ID
@@ -216,6 +218,7 @@ async function loadChart(coinId, days = 1) {
   window.addEventListener('resize', () => {
     loadResizedChart(myChart);
   });
+  updateContainerHeight();
 }
 
 // Dynamically loaded 'coin-details' section
