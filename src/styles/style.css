@@ -110,12 +110,16 @@ td:nth-child(2) {
 
 .table-row th {
     text-align: right;
-    font-size: 13px;
+    font-size: 12px;
     padding: 12px;
     position: sticky;
     top: 0;
     background-color: white;
     z-index: 1;
+}
+
+.table-row td {
+    font-size: 14px;
 }
 
 .table-row {
