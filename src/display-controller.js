@@ -284,7 +284,7 @@ function coinCreator(...args) {
 }
 
 // Use data from 'coins' array, to add coins to the DOM
-export function addCoins() {
+export function addCoins(coins) {
   coins.forEach((coin, index) => {
     // Adjust data
     const rank = index + 1;
@@ -309,6 +309,20 @@ export function removeTableData() {
   coinInfo.forEach((coin) => {
     coin.remove();
   });
+}
+
+// Search for specific coin
+export function searchCoinsArray() {
+  const searchBar = document.querySelector('#search');
+  const searchTerm = searchBar.value.toLowerCase();
+
+  // Remove previous table data
+  removeTableData();
+  if (searchTerm === '') return addCoins(coins);
+
+  // Filter data and add it to the table
+  const searchResults = coins.filter((coin) => coin.name.toLowerCase().includes(searchTerm));
+  addCoins(searchResults);
 }
 
 // Function that removes loading gif

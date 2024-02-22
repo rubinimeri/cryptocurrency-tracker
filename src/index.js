@@ -9,6 +9,7 @@ import {
   showMenu, moveSearchSelect, checkPage, addCoins,
   removeTableData, stopLoading, timeFrameSelector, toggleDarkMode,
   updateContainerHeight,
+  searchCoinsArray,
 } from './display-controller';
 import { coins } from './coin-data';
 import { coinWatch } from './fetch-data';
@@ -22,7 +23,9 @@ checkPage();
 
 // * Check if we are on the homepage, if so load the coins
 if (window.location.pathname.includes('index.html')) {
-// Logic
+  const search = document.getElementById('search');
+  search.addEventListener('input', searchCoinsArray);
+  // Logic
 
   let BTC = await coinWatch('BTC');
   let ETH = await coinWatch('ETH');
@@ -45,7 +48,11 @@ if (window.location.pathname.includes('index.html')) {
     coins.splice(0, coins.length);
     coins.push(BTC, ETH, ADA, LINK, SOL, TRX);
     removeTableData();
-    addCoins(coins);
+    if (search.value !== '') {
+      searchCoinsArray();
+    } else {
+      addCoins(coins);
+    }
   }, 6000);
 
   // Add coins to DOM
