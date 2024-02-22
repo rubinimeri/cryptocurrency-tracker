@@ -4,6 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CryptoZenith</title>
+    <style>
+        .load-container {
+          --uib-size: 40px;
+          --uib-color: black;
+          --uib-speed: 2s;
+          --uib-bg-opacity: 0;
+          height: var(--uib-size);
+          width: var(--uib-size);
+          transform-origin: center;
+          animation: rotate var(--uib-speed) linear infinite;
+          will-change: transform;
+          overflow: visible;
+        }
+      
+        .car {
+          fill: none;
+          stroke: var(--uib-color);
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+          stroke-linecap: round;
+          animation: stretch calc(var(--uib-speed) * 0.75) ease-in-out infinite;
+          will-change: stroke-dasharray, stroke-dashoffset;
+          transition: stroke 0.5s ease;
+        }
+      
+        .track {
+          fill: none;
+          stroke: var(--uib-color);
+          opacity: var(--uib-bg-opacity);
+          transition: stroke 0.5s ease;
+        }
+      
+        @keyframes rotate {
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      
+        @keyframes stretch {
+          0% {
+            stroke-dasharray: 0, 150;
+            stroke-dashoffset: 0;
+          }
+          50% {
+            stroke-dasharray: 75, 150;
+            stroke-dashoffset: -25;
+          }
+          100% {
+            stroke-dashoffset: -100;
+          }
+        }
+      </style>
 </head>
 <body style="display: flex;">
     <header class="header">
@@ -49,7 +101,7 @@
             <h3>Top Coins by Market Cap</h3>
         </section>
         <section class="crypto-list">
-            <table>
+            <table class="display-none">
                 <tr class="table-row">
                     <th><span>#</span></th>
                     <th><span>Name</span></th>
@@ -62,7 +114,31 @@
                 </tr>
             </table>
             <div class="loader">
-                
+                <svg
+                class="load-container"
+                viewBox="0 0 40 40"
+                height="40"
+                width="40"
+                >
+                <circle 
+                    class="track"
+                    cx="20" 
+                    cy="20" 
+                    r="17.5" 
+                    pathlength="100" 
+                    stroke-width="5px" 
+                    fill="none" 
+                />
+                <circle 
+                    class="car"
+                    cx="20" 
+                    cy="20" 
+                    r="17.5" 
+                    pathlength="100" 
+                    stroke-width="5px" 
+                    fill="none" 
+                />
+                </svg>
             </div>
         </section>
         <div class="pages">
