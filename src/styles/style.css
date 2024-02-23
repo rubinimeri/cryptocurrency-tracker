@@ -177,6 +177,10 @@ td:nth-child(2) {
     cursor: pointer;
 }
 
+.active-page {
+    background-color: var(--border-color);
+}
+
 .pages p:hover {
     background-color: var(--border-color);
 }
