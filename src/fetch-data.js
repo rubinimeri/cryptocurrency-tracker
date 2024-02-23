@@ -42,6 +42,32 @@ export async function coinWatch(coin) {
   }
 }
 
+// * Top 10 coins by market cap API
+export async function trendingCoins() {
+  try {
+    const response = await fetch(new Request('https://api.livecoinwatch.com/coins/list'), {
+      method: 'POST',
+      headers: new Headers({
+        'content-type': 'application/json',
+        'x-api-key': '3b01f704-6ad1-46c9-a083-00bd21a09289',
+      }),
+      body: JSON.stringify({
+        currency: 'USD',
+        sort: 'rank',
+        order: 'ascending',
+        offset: 0,
+        limit: 10,
+        meta: true,
+      }),
+    });
+    const data = response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
 /*
  * Get historical data for chart from CoinGecko API
  */
