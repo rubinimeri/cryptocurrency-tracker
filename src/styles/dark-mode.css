@@ -31,7 +31,8 @@
     border-top: 1px solid var(--dark-border);
 }
 
-.dark-mode .table-row:hover {
+.dark-mode .table-row:hover,
+.dark-mode .active-page {
     background-color: var(--row-hover-bgc);
 }
 
