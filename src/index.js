@@ -6,10 +6,9 @@ import './styles/contact.css';
 import './assets/logo-dark.png';
 import './styles/dark-mode.css';
 import {
-  showMenu, moveSearchSelect, checkPage, addCoins,
+  showMenu, moveSearchSelect, checkPage,
   removeTableData, stopLoading, timeFrameSelector, toggleDarkMode,
-  updateContainerHeight,
-  searchCoinsArray,
+  searchCoinsArray, renderCoinsDependingOnPage, pages, getSelectedPage,
 } from './display-controller';
 import { coins } from './coin-data';
 import { coinWatch } from './fetch-data';
@@ -23,6 +22,7 @@ checkPage();
 
 // * Check if we are on the homepage, if so load the coins
 if (window.location.pathname.includes('index.html')) {
+  pages();
   const search = document.getElementById('search');
   search.addEventListener('input', searchCoinsArray);
   // Logic
@@ -51,12 +51,12 @@ if (window.location.pathname.includes('index.html')) {
     if (search.value !== '') {
       searchCoinsArray();
     } else {
-      addCoins(coins);
+      renderCoinsDependingOnPage(getSelectedPage());
     }
   }, 6000);
 
   // Add coins to DOM
 
   stopLoading();
-  addCoins(coins);
+  renderCoinsDependingOnPage(1);
 }

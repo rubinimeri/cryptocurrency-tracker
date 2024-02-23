@@ -311,6 +311,43 @@ export function removeTableData() {
   });
 }
 
+// * Load different coins based on which page is clicked
+function getCoinsForPage(page) {
+  const coinsPerPage = 3;
+  const startIndex = (page - 1) * coinsPerPage;
+  const endIndex = startIndex + coinsPerPage;
+  return coins.slice(startIndex, endIndex);
+}
+
+export function getSelectedPage() {
+  const selectedPage = document.querySelector('.active-page').textContent;
+  return parseInt(selectedPage);
+}
+
+export function renderCoinsDependingOnPage(page) {
+  const myCoins = getCoinsForPage(page);
+  addCoins(myCoins);
+}
+
+// * Add event listener to pages
+export function pages() {
+  const pageOne = document.querySelector('#page-one');
+  const pageTwo = document.querySelector('#page-two');
+
+  pageOne.addEventListener('click', () => {
+    pageTwo.classList.remove('active-page');
+    pageOne.classList.add('active-page');
+    removeTableData();
+    renderCoinsDependingOnPage(1);
+  });
+  pageTwo.addEventListener('click', () => {
+    pageOne.classList.remove('active-page');
+    pageTwo.classList.add('active-page');
+    removeTableData();
+    renderCoinsDependingOnPage(2);
+  });
+}
+
 // Search for specific coin
 export function searchCoinsArray() {
   const searchBar = document.querySelector('#search');
@@ -318,7 +355,7 @@ export function searchCoinsArray() {
 
   // Remove previous table data
   removeTableData();
-  if (searchTerm === '') return addCoins(coins);
+  if (searchTerm === '') return renderCoinsDependingOnPage(getSelectedPage());
 
   // Filter data and add it to the table
   const searchResults = coins.filter((coin) => coin.name.toLowerCase().includes(searchTerm));
