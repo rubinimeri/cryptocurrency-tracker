@@ -148,9 +148,19 @@ function getCoin(coinId) {
   return COIN;
 }
 
+// * Function that takes a number and currency, formats the number and adds a currency to it
+function addCurrencyToNumber(number, currency) {
+  const USD = '$';
+  const EUR = '€';
+  const formattedNumber = addCommasToNumber(number);
+
+  if (currency === 'USD') return USD + formattedNumber;
+  return EUR + formattedNumber;
+}
+
 // * Depending on which coin was clicked, search through
 // * coins array to find it and load it's data to the DOM
-function loadCoinData(coinId) {
+function loadCoinData(coinId, currency = 'USD') {
   const {
     logo, name, price, hour, day, marketCap, volume, circulatingSupply, liquidity, week,
     month,
@@ -168,17 +178,17 @@ function loadCoinData(coinId) {
   // * Load data
   coinLogo.src = logo;
   coinName.textContent = name;
-  coinPrice.textContent = `$${addCommasToNumber(price)}`;
+  coinPrice.textContent = addCurrencyToNumber(price, currency);
   coinHour.textContent = hour;
   coinDay.textContent = day;
   coinWeek.textContent = week;
   coinMonth.textContent = month;
   coinYear.textContent = year;
   coinQuarter.textContent = quarter;
-  coinMarketCap.textContent = `$${addCommasToNumber(marketCap)}`;
-  coinVolume.textContent = `$${addCommasToNumber(volume)}`;
+  coinMarketCap.textContent = addCurrencyToNumber(marketCap, currency);
+  coinVolume.textContent = addCurrencyToNumber(volume, currency);
   coinCircSupply.textContent = addCommasToNumber(circulatingSupply);
-  coinLiquidity.textContent = `$${addCommasToNumber(liquidity)}`;
+  coinLiquidity.textContent = addCurrencyToNumber(liquidity, currency);
 
   // * Add classes
   coinHour.classList.add(hour > 0 ? 'positive' : 'negative', 'percent');
@@ -284,16 +294,16 @@ function coinCreator(...args) {
 }
 
 // Use data from 'coins' array, to add coins to the DOM
-export function addCoins(coins) {
+export function addCoins(coins, currency = 'USD') {
   coins.forEach((coin, index) => {
     // Adjust data
     const rank = index + 1;
     const {
       logo, name, hour, day,
     } = coin;
-    const price = `$${addCommasToNumber(coin.price)}`;
-    const marketCap = `$${addCommasToNumber(coin.marketCap)}`;
-    const volume = `$${addCommasToNumber(coin.volume)}`;
+    const price = addCurrencyToNumber(coin.price, currency);
+    const marketCap = addCurrencyToNumber(coin.marketCap, currency);
+    const volume = addCurrencyToNumber(coin.volume, currency);
     const circulatingSupply = addCommasToNumber(coin.circulatingSupply);
 
     coinCreator(rank, logo, name, price, hour, day, marketCap, volume, circulatingSupply);
