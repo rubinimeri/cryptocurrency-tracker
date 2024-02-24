@@ -348,6 +348,33 @@ export function pages() {
   });
 }
 
+// * Add functionality to arrows
+export function arrowListener() {
+  const arrowBack = document.querySelector('.arrow:nth-of-type(1)');
+  const arrowForward = document.querySelector('.arrow:nth-of-type(2)');
+  const pageOne = document.querySelector('#page-one');
+  const pageTwo = document.querySelector('#page-two');
+  let currentPage;
+  arrowBack.addEventListener('click', () => {
+    currentPage = getSelectedPage();
+    if (currentPage === 2) {
+      pageTwo.classList.remove('active-page');
+      pageOne.classList.add('active-page');
+      removeTableData();
+      renderCoinsDependingOnPage(1);
+    }
+  });
+  arrowForward.addEventListener('click', () => {
+    currentPage = getSelectedPage();
+    if (currentPage === 1) {
+      pageOne.classList.remove('active-page');
+      pageTwo.classList.add('active-page');
+      removeTableData();
+      renderCoinsDependingOnPage(2);
+    }
+  });
+}
+
 // Search for specific coin
 export function searchCoinsArray() {
   const searchBar = document.querySelector('#search');
