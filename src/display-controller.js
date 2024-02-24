@@ -4,6 +4,7 @@ import {
 } from './coin-chart';
 import { historicalData } from './fetch-data';
 import { coins } from './coin-data';
+import getCoins from './index';
 import './assets/logo-light.png';
 
 // Show hamburger menu
@@ -158,9 +159,17 @@ function addCurrencyToNumber(number, currency) {
   return EUR + formattedNumber;
 }
 
+// * Check which currency is selected
+export function checkCurrency() {
+  const currencySelector = document.getElementById('currency');
+  const selectedOption = currencySelector.options[currencySelector.selectedIndex];
+  const currency = selectedOption.value.toUpperCase();
+  return currency;
+}
+
 // * Depending on which coin was clicked, search through
 // * coins array to find it and load it's data to the DOM
-function loadCoinData(coinId, currency = 'USD') {
+function loadCoinData(coinId) {
   const {
     logo, name, price, hour, day, marketCap, volume, circulatingSupply, liquidity, week,
     month,
@@ -174,6 +183,8 @@ function loadCoinData(coinId, currency = 'USD') {
 
   const [coinHour, coinDay, coinWeek, coinMonth, coinQuarter, coinYear, coinMarketCap,
     coinVolume, coinCircSupply, coinLiquidity] = otherData;
+
+  const currency = checkCurrency();
 
   // * Load data
   coinLogo.src = logo;
@@ -201,7 +212,8 @@ function loadCoinData(coinId, currency = 'USD') {
 
 // * Get coin dates and prices
 async function getCoinData(coinId, days) {
-  const result = await historicalData(coinId, 'usd', days);
+  const currency = checkCurrency();
+  const result = await historicalData(coinId, currency, days);
   const prices = result.map((price) => price[1]);
   const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
   return [dates, prices];
@@ -336,7 +348,8 @@ export function getSelectedPage() {
 
 export function renderCoinsDependingOnPage(page) {
   const myCoins = getCoinsForPage(page);
-  addCoins(myCoins);
+  const currency = checkCurrency();
+  addCoins(myCoins, currency);
 }
 
 // * Add event listener to pages
@@ -408,6 +421,14 @@ export function stopLoading() {
   loader.classList.add('display-none');
 }
 
+// * Function that starts the loading
+function startLoading() {
+  const loader = document.querySelector('.loader');
+  const table = document.querySelector('table');
+  table.classList.add('display-none');
+  loader.classList.remove('display-none');
+}
+
 // * Add event listener to timeframe radio buttons
 // * and load a new chart based on the selected timeframe
 export function timeFrameSelector() {
@@ -445,5 +466,23 @@ export function timeFrameSelector() {
       }
       changeChartData(dates, prices);
     });
+  });
+}
+
+// * Add event listener to currency selector
+export function currencyListener() {
+  const currencySelector = document.getElementById('currency');
+  currencySelector.addEventListener('change', async () => {
+    startLoading();
+    removeTableData();
+    coins.splice(0, coins.length);
+    await getCoins();
+    stopLoading();
+    if (myChart) {
+      myChart.destroy();
+      loadChart(coinId);
+    }
+    const selectedPage = getSelectedPage();
+    renderCoinsDependingOnPage(selectedPage);
   });
 }

@@ -1,8 +1,9 @@
 import { Coin } from './coin-data';
+import { addCoins } from './display-controller';
 
 // Live Coin Watch API
 
-export async function coinWatch(coin) {
+export async function coinWatch(coin, currency) {
   try {
     const response = await fetch(new Request('https://api.livecoinwatch.com/coins/single'), {
       method: 'POST',
@@ -11,7 +12,7 @@ export async function coinWatch(coin) {
         'x-api-key': '3b01f704-6ad1-46c9-a083-00bd21a09289',
       }),
       body: JSON.stringify({
-        currency: 'USD',
+        currency,
         code: coin,
         meta: true,
       }),
@@ -61,8 +62,7 @@ export async function trendingCoins() {
       }),
     });
     const data = response.json();
-    console.log(data);
-    return data;
+    return addCoins(data);
   } catch (error) {
     return error;
   }
