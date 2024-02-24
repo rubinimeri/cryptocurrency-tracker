@@ -36,7 +36,6 @@ export default async function getCoins() {
   const DAI = await coinWatch('DAI', currency);
 
   coins.push(BTC, ETH, ADA, LINK, SOL, TRX, DOGE, DOT, ARB, DAI);
-  console.log(coins);
 }
 
 // * Check if we are on the homepage, if so load the coins
@@ -49,7 +48,7 @@ if (window.location.pathname.includes('index.html')) {
   await getCoins();
 
   // Every 6 seconds, get new data from API
-  /*   setInterval(async () => {
+  setInterval(async () => {
     coins.splice(0, coins.length);
     await getCoins();
     removeTableData();
@@ -58,7 +57,7 @@ if (window.location.pathname.includes('index.html')) {
     } else {
       renderCoinsDependingOnPage(getSelectedPage());
     }
-  }, 6000); */
+  }, 6000);
 
   // Add coins to DOM
 
