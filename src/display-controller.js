@@ -335,7 +335,7 @@ export function removeTableData() {
 
 // * Load different coins based on which page is clicked
 function getCoinsForPage(page) {
-  const coinsPerPage = 3;
+  const coinsPerPage = 5;
   const startIndex = (page - 1) * coinsPerPage;
   const endIndex = startIndex + coinsPerPage;
   return coins.slice(startIndex, endIndex);
