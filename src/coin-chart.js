@@ -165,7 +165,7 @@ const config = (dates, prices, numTicks) => ({
           display: false,
         },
         ticks: {
-          maxTicksLimit: numTicks,
+          /*           maxTicksLimit: numTicks, */
           align: 'start',
           color: 'gray',
           font: {
@@ -245,18 +245,6 @@ const config = (dates, prices, numTicks) => ({
 export function loadChartWithData(dates, prices, numTicks) {
   const ctx = document.getElementById('myChart');
   myChart = new Chart(ctx, config(dates, prices, numTicks));
-}
-
-/*
- * Recreate the chart with updated properties depending on
- * window width
- */
-export function loadResizedChart() {
-  if (window.innerWidth <= 900 && window.innerWidth > 640) {
-    myChart.config.options.scales.x.ticks.maxTicksLimit = 7;
-  } else if (window.innerWidth <= 640) {
-    myChart.config.options.scales.x.ticks.maxTicksLimit = 4;
-  } else myChart.config.options.scales.x.ticks.maxTicksLimit = 10;
 }
 
 // * Change chart data

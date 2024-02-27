@@ -215,7 +215,10 @@ async function getCoinData(coinId, days) {
   const currency = checkCurrency();
   const result = await historicalData(coinId, currency, days);
   const prices = result.map((price) => price[1]);
-  const dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
+  let dates;
+  if (days === 1) dates = result.map((timee) => moment.unix(timee[0] / 1000).format('HH:mm'));
+  else dates = result.map((timee) => moment.unix(timee[0] / 1000).format('MM-DD-YYYY'));
+
   return [dates, prices];
 }
 
@@ -224,10 +227,6 @@ async function loadChart(coinId, days = 1) {
   // Create chart
   loadChartWithData(dates, prices, 10);
   loadCoinData(coinId);
-
-  window.addEventListener('resize', () => {
-    loadResizedChart(myChart);
-  });
   updateContainerHeight();
 }
 
