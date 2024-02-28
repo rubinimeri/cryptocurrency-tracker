@@ -25,6 +25,7 @@
   "dependencies": {
     "chart.js": "^4.4.1",
     "chartjs-plugin-crosshair": "^2.0.0",
+    "firebase": "^10.8.0",
     "kute.js": "^2.2.4",
     "moment": "^2.30.1"
   }
