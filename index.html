@@ -1,230 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CryptoZenith</title>
     <style>
-        .load-container {
-          --uib-size: 40px;
-          --uib-color: black;
-          --uib-speed: 2s;
-          --uib-bg-opacity: 0;
-          height: var(--uib-size);
-          width: var(--uib-size);
-          transform-origin: center;
-          animation: rotate var(--uib-speed) linear infinite;
-          will-change: transform;
-          overflow: visible;
-        }
-      
-        .car {
-          fill: none;
-          stroke: var(--uib-color);
-          stroke-dasharray: 1, 200;
-          stroke-dashoffset: 0;
-          stroke-linecap: round;
-          animation: stretch calc(var(--uib-speed) * 0.75) ease-in-out infinite;
-          will-change: stroke-dasharray, stroke-dashoffset;
-          transition: stroke 0.5s ease;
-        }
-      
-        .track {
-          fill: none;
-          stroke: var(--uib-color);
-          opacity: var(--uib-bg-opacity);
-          transition: stroke 0.5s ease;
-        }
-      
-        @keyframes rotate {
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-      
-        @keyframes stretch {
-          0% {
-            stroke-dasharray: 0, 150;
-            stroke-dashoffset: 0;
-          }
-          50% {
-            stroke-dasharray: 75, 150;
-            stroke-dashoffset: -25;
-          }
-          100% {
-            stroke-dashoffset: -100;
-          }
-        }
-      </style>
-</head>
-<body style="display: flex;">
-    <header class="header">
-        <nav class="top-nav"> 
-            <div class="logo-container">
-                <a href="index.html"><img src="./82ce140b93c72bd10f68.png" alt=""></a>
-            </div>
-            <div class="toggler">
-                <svg class="dark" xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>
-                <svg class="display-none light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></svg>
-            </div>
-            <div class="select-container">
-                <select name="currency" id="currency" class="select-box">
-                    <option value="usd">USD</option>
-                    <option value="eur">EUR</option>
-                </select>
-                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
-            </div>
-            <div class="search-container">
+      .load-container {
+        --uib-size: 40px;
+        --uib-color: black;
+        --uib-speed: 2s;
+        --uib-bg-opacity: 0;
+        height: var(--uib-size);
+        width: var(--uib-size);
+        transform-origin: center;
+        animation: rotate var(--uib-speed) linear infinite;
+        will-change: transform;
+        overflow: visible;
+      }
 
-                <label for="search">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
-                </label>
-                <input type="search" name="search" id="search" placeholder="Search">
-            </div>
-            <div class="hamburger">
-                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
-            </div>
-        </nav>
-        <nav class="bottom-nav">
-            <div class="nav-link"><a href="index.html">Coins</a></div>
-            <div class="nav-link"><a href="about.html">About</a></div>
-            <div class="nav-link"><a href="contact.html">Contact</a></div>
-            <div class="login-register">
-                <a href="#" class="login">Login</a>
-                <a href="#" class="register">Register</a>
-            </div>
-        </nav>
+      .car {
+        fill: none;
+        stroke: var(--uib-color);
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        animation: stretch calc(var(--uib-speed) * 0.75) ease-in-out infinite;
+        will-change: stroke-dasharray, stroke-dashoffset;
+        transition: stroke 0.5s ease;
+      }
+
+      .track {
+        fill: none;
+        stroke: var(--uib-color);
+        opacity: var(--uib-bg-opacity);
+        transition: stroke 0.5s ease;
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes stretch {
+        0% {
+          stroke-dasharray: 0, 150;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 75, 150;
+          stroke-dashoffset: -25;
+        }
+        100% {
+          stroke-dashoffset: -100;
+        }
+      }
+    </style>
+  </head>
+  <body style="display: flex">
+    <header class="header">
+      <nav class="top-nav">
+        <div class="logo-container">
+          <a href="index.html"
+            ><img src="./82ce140b93c72bd10f68.png" alt=""
+          /></a>
+        </div>
+        <div class="toggler">
+          <svg
+            class="dark"
+            xmlns="http://www.w3.org/2000/svg"
+            height="16"
+            width="12"
+            viewBox="0 0 384 512"
+          >
+            <path
+              d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"
+            />
+          </svg>
+          <svg
+            class="display-none light"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path
+              d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"
+            />
+          </svg>
+        </div>
+        <div class="select-container">
+          <select name="currency" id="currency" class="select-box">
+            <option value="usd">USD</option>
+            <option value="eur">EUR</option>
+          </select>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="16"
+            width="10"
+            viewBox="0 0 320 512"
+          >
+            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path
+              d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+            />
+          </svg>
+        </div>
+        <div class="search-container">
+          <label for="search">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="16"
+              width="16"
+              viewBox="0 0 512 512"
+            >
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+              <path
+                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+              />
+            </svg>
+          </label>
+          <input type="search" name="search" id="search" placeholder="Search" />
+        </div>
+        <div class="hamburger">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="16"
+            width="14"
+            viewBox="0 0 448 512"
+          >
+            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+            <path
+              d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+            />
+          </svg>
+        </div>
+      </nav>
+      <nav class="bottom-nav">
+        <div class="nav-link"><a href="index.html">Coins</a></div>
+        <div class="nav-link"><a href="about.html">About</a></div>
+        <div class="nav-link"><a href="contact.html">Contact</a></div>
+        <div class="login-register">
+          <a href="login-register.html" class="login">Login</a>
+          <a href="login-register.html" class="register">Register</a>
+        </div>
+      </nav>
     </header>
     <div class="container">
-        <section class="hero-title">
-            <h1>Cryptocurrency Prices Live</h1>
-            <h3>Top Coins by Market Cap</h3>
-        </section>
-        <section class="crypto-list">
-            <table class="display-none">
-                <tr class="table-row">
-                    <th><span>#</span></th>
-                    <th><span>Name</span></th>
-                    <th><span>Price</span></th>
-                    <th><span>1h%</span></th>
-                    <th><span>24h%</span></th>
-                    <th><span>Market Cap</span></th>
-                    <th><span>Volume (24h)</span></th>
-                    <th><span>Circulating Supply</span></th>
-                </tr>
-            </table>
-            <div class="loader">
-                <svg
-                class="load-container"
-                viewBox="0 0 40 40"
-                height="40"
-                width="40"
-                >
-                <circle 
-                    class="track"
-                    cx="20" 
-                    cy="20" 
-                    r="17.5" 
-                    pathlength="100" 
-                    stroke-width="5px" 
-                    fill="none" 
-                />
-                <circle 
-                    class="car"
-                    cx="20" 
-                    cy="20" 
-                    r="17.5" 
-                    pathlength="100" 
-                    stroke-width="5px" 
-                    fill="none" 
-                />
-                </svg>
-            </div>
-        </section>
-        <div class="pages">
-            <div class="arrow">
-                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-            </div>
-            <p class="active-page" id="page-one">1</p>
-            <p id="page-two">2</p>
-            <div class="arrow">
-                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
-            </div>
+      <section class="hero-title">
+        <h1>Cryptocurrency Prices Live</h1>
+        <h3>Top Coins by Market Cap</h3>
+      </section>
+      <section class="crypto-list">
+        <table class="display-none">
+          <tr class="table-row">
+            <th><span>#</span></th>
+            <th><span>Name</span></th>
+            <th><span>Price</span></th>
+            <th><span>1h%</span></th>
+            <th><span>24h%</span></th>
+            <th><span>Market Cap</span></th>
+            <th><span>Volume (24h)</span></th>
+            <th><span>Circulating Supply</span></th>
+          </tr>
+        </table>
+        <div class="loader">
+          <svg
+            class="load-container"
+            viewBox="0 0 40 40"
+            height="40"
+            width="40"
+          >
+            <circle
+              class="track"
+              cx="20"
+              cy="20"
+              r="17.5"
+              pathlength="100"
+              stroke-width="5px"
+              fill="none"
+            />
+            <circle
+              class="car"
+              cx="20"
+              cy="20"
+              r="17.5"
+              pathlength="100"
+              stroke-width="5px"
+              fill="none"
+            />
+          </svg>
         </div>
-        <section class="coin-details display-none">
-            <div class="data-container">
-                <div class="coin-name">
-                    <div class="name-container">
-                        <img src="" alt="">
-                        <h3></h3>
-                    </div>
-                    <div class="price">
-                        <h1></h1>
-                    </div>
-                </div>
-                <div class="timeframe-container">
-                    <label for="day" class="checked">
-                        <input type="radio" name="timeframe" id="day" value="day" checked> 1D
-                    </label>
-                    <label for="week">
-                        <input type="radio" name="timeframe" id="week" value="week"> 7D
-                    </label>
-                    <label for="month">
-                        <input type="radio" name="timeframe" id="month" value="month"> 1M
-                    </label>
-                    <label for="quarter">
-                        <input type="radio" name="timeframe" id="quarter" value="quarter"> 3M
-                    </label>
-                    <label for="year">
-                        <input type="radio" name="timeframe" id="year" value="year"> 1Y
-                    </label>
-                </div>
+      </section>
+      <div class="pages">
+        <div class="arrow">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="16"
+            width="10"
+            viewBox="0 0 320 512"
+          >
+            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path
+              d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+            />
+          </svg>
+        </div>
+        <p class="active-page" id="page-one">1</p>
+        <p id="page-two">2</p>
+        <div class="arrow">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="16"
+            width="10"
+            viewBox="0 0 320 512"
+          >
+            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path
+              d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"
+            />
+          </svg>
+        </div>
+      </div>
+      <section class="coin-details display-none">
+        <div class="data-container">
+          <div class="coin-name">
+            <div class="name-container">
+              <img src="" alt="" />
+              <h3></h3>
             </div>
-            
-            <div class="chart-container">
-                <canvas id="myChart"></canvas>
+            <div class="price">
+              <h1></h1>
             </div>
+          </div>
+          <div class="timeframe-container">
+            <label for="day" class="checked">
+              <input
+                type="radio"
+                name="timeframe"
+                id="day"
+                value="day"
+                checked
+              />
+              1D
+            </label>
+            <label for="week">
+              <input type="radio" name="timeframe" id="week" value="week" /> 7D
+            </label>
+            <label for="month">
+              <input type="radio" name="timeframe" id="month" value="month" />
+              1M
+            </label>
+            <label for="quarter">
+              <input
+                type="radio"
+                name="timeframe"
+                id="quarter"
+                value="quarter"
+              />
+              3M
+            </label>
+            <label for="year">
+              <input type="radio" name="timeframe" id="year" value="year" /> 1Y
+            </label>
+          </div>
+        </div>
 
-            <div class="other-data">
-                <div class="delta">
-                    <div><span class="data-name">1h%</span><span class="data"></span></div>
-                    <div><span class="data-name">24h%</span><span class="data"></span></div>
-                    <div><span class="data-name">7d%</span><span class="data"></span></div>
-                    <div><span class="data-name">30d%</span><span class="data"></span></div>
-                    <div><span class="data-name">90d%</span><span class="data"></span></div>
-                    <div><span class="data-name">1y%</span><span class="data"></span></div>
-                </div>
-                <div class="other">
-                    <div><span class="data-name">Market Cap</span><span class="data"></span></div>
-                    <div><span class="data-name">Volume (24h)</span><span class="data"></span></div>
-                    <div><span class="data-name">Circulating Supply</span><span class="data"></span></div>
-                    <div><span class="data-name">Liquidity</span><span class="data"></span></div>
-                </div>
+        <div class="chart-container">
+          <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="other-data">
+          <div class="delta">
+            <div>
+              <span class="data-name">1h%</span><span class="data"></span>
             </div>
-        </section>
+            <div>
+              <span class="data-name">24h%</span><span class="data"></span>
+            </div>
+            <div>
+              <span class="data-name">7d%</span><span class="data"></span>
+            </div>
+            <div>
+              <span class="data-name">30d%</span><span class="data"></span>
+            </div>
+            <div>
+              <span class="data-name">90d%</span><span class="data"></span>
+            </div>
+            <div>
+              <span class="data-name">1y%</span><span class="data"></span>
+            </div>
+          </div>
+          <div class="other">
+            <div>
+              <span class="data-name">Market Cap</span
+              ><span class="data"></span>
+            </div>
+            <div>
+              <span class="data-name">Volume (24h)</span
+              ><span class="data"></span>
+            </div>
+            <div>
+              <span class="data-name">Circulating Supply</span
+              ><span class="data"></span>
+            </div>
+            <div>
+              <span class="data-name">Liquidity</span><span class="data"></span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <footer>
-        <div>
-            <div class="footer-logo">
-                <img src="./82ce140b93c72bd10f68.png" alt="">
-            </div>
-            <p>
-                For more information please contact <br>
-                example@email.com
-            </p>
+      <div>
+        <div class="footer-logo">
+          <img src="./82ce140b93c72bd10f68.png" alt="" />
         </div>
-        <div>
-            <p>© 2024 CryptoZenith. All rights reserved</p>
-            <a href="">
-                Third Party Cookie Disclosure
-            </a>
-        </div>
-        <div class="icons">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-        </div>
+        <p>
+          For more information please contact <br />
+          example@email.com
+        </p>
+      </div>
+      <div>
+        <p>© 2024 CryptoZenith. All rights reserved</p>
+        <a href=""> Third Party Cookie Disclosure </a>
+      </div>
+      <div class="icons">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="10"
+          viewBox="0 0 320 512"
+        >
+          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+          <path
+            d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
+          />
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="16"
+          viewBox="0 0 512 512"
+        >
+          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+          <path
+            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
+          />
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="14"
+          viewBox="0 0 448 512"
+        >
+          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+          <path
+            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+          />
+        </svg>
+      </div>
     </footer>
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
