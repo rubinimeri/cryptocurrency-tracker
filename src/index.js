@@ -12,12 +12,14 @@ import {
 } from './display-controller';
 import { coins } from './coin-data';
 import { coinWatch } from './fetch-data';
+import setRegister, { changeAuth, loadAuth } from './login-register';
 
 showMenu();
 moveSearchSelect();
 window.addEventListener('resize', moveSearchSelect);
 window.addEventListener('DOMContentLoaded', timeFrameSelector);
 window.addEventListener('DOMContentLoaded', toggleDarkMode);
+setRegister();
 checkPage();
 
 // * Function that gets coin data from API and pushes it to coins array
@@ -38,8 +40,10 @@ export default async function getCoins() {
   coins.push(BTC, ETH, ADA, LINK, SOL, TRX, DOGE, DOT, ARB, DAI);
 }
 
+const windowPath = window.location.pathname;
+
 // * Check if we are on the homepage, if so load the coins
-if (window.location.pathname.includes('index.html')) {
+if (windowPath.includes('index.html')) {
   pages();
   arrowListener();
   await currencyListener();
@@ -48,7 +52,7 @@ if (window.location.pathname.includes('index.html')) {
   await getCoins();
 
   // Every 6 seconds, get new data from API
-  setInterval(async () => {
+  /* setInterval(async () => {
     coins.splice(0, coins.length);
     await getCoins();
     removeTableData();
@@ -57,10 +61,16 @@ if (window.location.pathname.includes('index.html')) {
     } else {
       renderCoinsDependingOnPage(getSelectedPage());
     }
-  }, 6000);
+  }, 6000); */
 
   // Add coins to DOM
 
   stopLoading();
   renderCoinsDependingOnPage(1);
+}
+
+// * Check if we are ong login-register page
+if (windowPath.includes('login-register.html')) {
+  loadAuth();
+  changeAuth();
 }
