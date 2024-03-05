@@ -10,40 +10,30 @@ export default function setRegister() {
   });
 }
 
-const changeToLogin = document.querySelector('.p.display-none');
-const changeToRegister = document.querySelector('.p');
-const register = document.querySelector('.button-submit.display-none');
-const login = document.querySelector('.button-submit');
+const loginForm = document.querySelector('.login-form');
+const registerForm = document.querySelector('.register-form');
 
 export function loadAuth() {
   if (localStorage.getItem('register') === 'true') {
-    changeToLogin.classList.remove('display-none');
-    changeToRegister.classList.add('display-none');
-    register.classList.remove('display-none');
-    login.classList.add('display-none');
+    loginForm.classList.add('display-none');
+    registerForm.classList.remove('display-none');
   } else {
-    changeToLogin.classList.add('display-none');
-    changeToRegister.classList.remove('display-none');
-    login.classList.remove('display-none');
-    register.classList.add('display-none');
+    loginForm.classList.remove('display-none');
+    registerForm.classList.add('display-none');
   }
 }
 
 export function changeAuth() {
-  const loginSpan = changeToLogin.querySelector('.span');
-  const registerSpan = changeToRegister.querySelector('.span');
+  const loginSpan = document.querySelector('.login-span');
+  const registerSpan = document.querySelector('.register-span');
 
   loginSpan.addEventListener('click', () => {
-    changeToLogin.classList.add('display-none');
-    changeToRegister.classList.remove('display-none');
-    login.classList.remove('display-none');
-    register.classList.add('display-none');
+    loginForm.classList.remove('display-none');
+    registerForm.classList.add('display-none');
   });
 
   registerSpan.addEventListener('click', () => {
-    changeToLogin.classList.remove('display-none');
-    changeToRegister.classList.add('display-none');
-    register.classList.remove('display-none');
-    login.classList.add('display-none');
+    loginForm.classList.add('display-none');
+    registerForm.classList.remove('display-none');
   });
 }
