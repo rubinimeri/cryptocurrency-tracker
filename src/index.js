@@ -12,8 +12,9 @@ import {
 } from './display-controller';
 import { coins } from './coin-data';
 import { coinWatch } from './fetch-data';
-import setRegister, { changeAuth, loadAuth } from './login-register';
+import setRegister, { changeAuth, initApp, loadAuth } from './login-register';
 
+window.addEventListener('DOMContentLoaded', initApp);
 showMenu();
 moveSearchSelect();
 window.addEventListener('resize', moveSearchSelect);
@@ -46,7 +47,7 @@ const windowPath = window.location.pathname;
 if (windowPath.includes('index.html')) {
   pages();
   arrowListener();
-  await currencyListener();
+  currencyListener();
   const search = document.getElementById('search');
   search.addEventListener('input', searchCoinsArray);
   await getCoins();
