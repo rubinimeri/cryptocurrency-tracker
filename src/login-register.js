@@ -72,6 +72,7 @@ function validateField(field) {
   return true;
 }
 
+// Initialize app with firebase
 export function initApp() {
   const firebaseConfig = {
     apiKey: 'AIzaSyCMWkmMwBE4cHNrWwB9yNRyu1stR38cQx0',
@@ -88,8 +89,8 @@ export function initApp() {
   const auth = getAuth(app);
   const database = getDatabase(app);
 
-  const registerForm = document.querySelector('.register-form');
   const registerButton = document.getElementById('register');
+  const loginButton = document.getElementById('login');
 
   // Add event listener to register form
   registerButton.addEventListener('click', (e) => {
@@ -133,6 +134,31 @@ export function initApp() {
       .catch((error) => {
         // Handle registration error
         console.error('Registration error:', error.message);
+      });
+  });
+
+  loginButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    // Get input values
+    const email = loginForm.querySelector('.email-form').value;
+    const password = loginForm.querySelector('.password-form').value;
+
+    // Validate email and password
+    if (validateEmail(email) === false || validatePassword(password) === false) {
+      alert('Email or password format is incorrect');
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+      // Handle successful login
+        const { user } = userCredential;
+        console.log('User logged in:', user);
+      })
+      .catch((error) => {
+      // Handle login error
+        console.error('Login error:', error.message);
       });
   });
 }
