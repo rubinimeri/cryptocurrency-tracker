@@ -6,18 +6,6 @@ import {
   getDatabase, ref, set, get,
 } from 'firebase/database';
 
-export default function setRegister() {
-  const loginHeader = document.querySelector('.login');
-  const registerHeader = document.querySelector('.register');
-
-  registerHeader.addEventListener('click', () => {
-    localStorage.setItem('register', 'true');
-  });
-  loginHeader.addEventListener('click', () => {
-    localStorage.setItem('register', 'false');
-  });
-}
-
 const loginForm = document.querySelector('.login-form');
 const registerForm = document.querySelector('.register-form');
 
@@ -51,8 +39,12 @@ function validateField(field) {
   return true;
 }
 
+function redirectToHomepage() {
+  window.location.href = 'index.html';
+}
+
 // Initialize app with firebase
-export function initApp() {
+export default function initApp() {
   const firebaseConfig = {
     apiKey: 'AIzaSyCMWkmMwBE4cHNrWwB9yNRyu1stR38cQx0',
     authDomain: 'cryptozenith-bc20a.firebaseapp.com',
@@ -128,6 +120,7 @@ export function initApp() {
         // Handle login error
           console.error('Login error:', error.message);
         });
+      redirectToHomepage();
     });
   }
 
@@ -176,6 +169,7 @@ export function initApp() {
         // Handle registration error
           console.error('Registration error:', error.message);
         });
+      redirectToHomepage();
     });
   }
 }
