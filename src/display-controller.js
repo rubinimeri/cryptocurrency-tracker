@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {
-  changeChartData, loadChartWithData, loadResizedChart, myChart,
+  changeChartData, loadChartWithData, myChart,
 } from './coin-chart';
 import { historicalData } from './fetch-data';
 import { coins } from './coin-data';
@@ -20,6 +20,38 @@ export function showMenu() {
       bottomNav.classList.toggle('active');
     });
   });
+}
+
+function capitalizeFullName(fullName) {
+  // Split the full name into words
+  const words = fullName.split(' ');
+
+  // Capitalize the first letter of each word
+  const capitalizedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+
+  // Join the capitalized words back together
+  return capitalizedWords.join(' ');
+}
+
+// * Load profile to header
+export function loadProfileToHeader(fullName) {
+  const loginRegister = document.querySelector('.login-register');
+  const profile = document.querySelector('.profile');
+  const span = profile.querySelector('span');
+
+  loginRegister.classList.add('display-none');
+  span.textContent = capitalizeFullName(fullName);
+}
+
+// * Load profile page with data
+export function loadProfilePage(fullName, username, email) {
+  const fullNameElement = document.querySelector('#full-name');
+  const usernameElement = document.querySelector('#username');
+  const emailElement = document.querySelector('#email');
+
+  fullNameElement.textContent = capitalizeFullName(fullName);
+  usernameElement.textContent = username;
+  emailElement.textContent = email;
 }
 
 // Move search bar and currency selector to
@@ -235,12 +267,12 @@ async function loadChart(coinId, days = 1) {
 
 async function loadCoinDetails(coinId) {
   const cryptoList = document.querySelector('.crypto-list');
-  const pages = document.querySelector('.pages');
+  const pageSection = document.querySelector('.pages');
   const coinDetails = document.querySelector('.coin-details');
   const h1 = document.querySelector('.hero-title');
   coinDetails.classList.remove('display-none');
   cryptoList.classList.add('display-none');
-  pages.classList.add('display-none');
+  pageSection.classList.add('display-none');
   h1.classList.add('display-none');
   await loadChart(coinId);
 }
@@ -342,7 +374,7 @@ function getCoinsForPage(page) {
 
 export function getSelectedPage() {
   const selectedPage = document.querySelector('.active-page').textContent;
-  return parseInt(selectedPage);
+  return parseInt(selectedPage, 10);
 }
 
 export function renderCoinsDependingOnPage(page) {
@@ -408,7 +440,7 @@ export function searchCoinsArray() {
 
   // Filter data and add it to the table
   const searchResults = coins.filter((coin) => coin.name.toLowerCase().includes(searchTerm));
-  addCoins(searchResults);
+  return addCoins(searchResults);
 }
 
 // Function that removes loading gif
@@ -433,7 +465,7 @@ function startLoading() {
 export function timeFrameSelector() {
   const timeFrames = Array.from(document.querySelectorAll('input[type="radio"]'));
   timeFrames.forEach((timeframe) => {
-    timeframe.addEventListener('change', async function () {
+    timeframe.addEventListener('change', async function loadTimeFrame() {
       const selectedTimeFrameValue = this.value;
       let dates; let
         prices;

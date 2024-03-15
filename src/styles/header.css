@@ -127,6 +127,7 @@ nav {
     border-right: 2px solid gray;
     flex-grow: 1;
     text-align: center;
+    align-items: flex-end;
     display: flex;
     justify-content: center;
     gap: 4px;
@@ -185,6 +186,18 @@ nav {
     border: 1px solid var(--primary-color);
     border-radius: 8px;
     color: var(--primary-color);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    border: none !important;
+}
+
+.profile svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
 }
 
 @media only screen and (max-width: 900px) {

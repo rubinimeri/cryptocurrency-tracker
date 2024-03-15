@@ -3,16 +3,19 @@ import './styles/style.css';
 import './styles/about.css';
 import './styles/footer.css';
 import './styles/contact.css';
+import './styles/profile.css';
 import './assets/logo-dark.png';
 import './styles/dark-mode.css';
+import { getAuth } from 'firebase/auth';
 import {
   showMenu, moveSearchSelect, checkPage,
   removeTableData, stopLoading, timeFrameSelector, toggleDarkMode,
-  searchCoinsArray, renderCoinsDependingOnPage, pages, getSelectedPage, arrowListener, checkCurrency, currencyListener,
+  searchCoinsArray, renderCoinsDependingOnPage, pages, getSelectedPage,
+  arrowListener, checkCurrency, currencyListener,
 } from './display-controller';
 import { coins } from './coin-data';
 import { coinWatch } from './fetch-data';
-import setRegister, { changeAuth, initApp, loadAuth } from './login-register';
+import initApp from './login-register';
 
 window.addEventListener('DOMContentLoaded', initApp);
 showMenu();
@@ -20,7 +23,6 @@ moveSearchSelect();
 window.addEventListener('resize', moveSearchSelect);
 window.addEventListener('DOMContentLoaded', timeFrameSelector);
 window.addEventListener('DOMContentLoaded', toggleDarkMode);
-setRegister();
 checkPage();
 
 // * Function that gets coin data from API and pushes it to coins array
@@ -68,10 +70,4 @@ if (windowPath.includes('index.html')) {
 
   stopLoading();
   renderCoinsDependingOnPage(1);
-}
-
-// * Check if we are ong login-register page
-if (windowPath.includes('login-register.html')) {
-  loadAuth();
-  changeAuth();
 }

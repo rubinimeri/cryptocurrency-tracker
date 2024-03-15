@@ -101,7 +101,7 @@ const dottedLine = {
 /*
  * Configuration for the chart
  */
-const config = (dates, prices, numTicks) => ({
+const config = (dates, prices) => ({
   type: 'line',
   data: {
     labels: dates,
@@ -165,7 +165,6 @@ const config = (dates, prices, numTicks) => ({
           display: false,
         },
         ticks: {
-          /*           maxTicksLimit: numTicks, */
           align: 'start',
           color: 'gray',
           font: {
@@ -242,13 +241,13 @@ const config = (dates, prices, numTicks) => ({
 /*
  * Function that selects canvas from HTML and loads chart
  */
-export function loadChartWithData(dates, prices, numTicks) {
+export function loadChartWithData(dates, prices) {
   const ctx = document.getElementById('myChart');
-  myChart = new Chart(ctx, config(dates, prices, numTicks));
+  myChart = new Chart(ctx, config(dates, prices));
 }
 
 // * Change chart data
 export function changeChartData(dates, prices) {
   myChart.destroy();
-  loadChartWithData(dates, prices, 4);
+  loadChartWithData(dates, prices);
 }

@@ -5,6 +5,7 @@ import {
 import {
   getDatabase, ref, set, get,
 } from 'firebase/database';
+import { loadProfilePage, loadProfileToHeader } from './display-controller';
 
 const loginForm = document.querySelector('.login-form');
 const registerForm = document.querySelector('.register-form');
@@ -81,7 +82,7 @@ export default function initApp() {
       getUserDataFromDatabase(userId)
         .then((userData) => {
           if (userData) {
-            console.log("User's data:", userData.email, userData.fullName, userData.username);
+            loadProfileToHeader(userData.fullName);
           } else {
             console.log("User's data not found in the database");
           }
@@ -94,6 +95,21 @@ export default function initApp() {
       console.log('User is signed out');
     }
   });
+
+  if (page.includes('profile.html')) {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        const userId = user.uid;
+        getUserDataFromDatabase(userId)
+          .then((userData) => {
+            console.log('User data:', userData);
+            loadProfilePage(userData.fullName, userData.username, userData.email);
+          });
+      } else {
+        console.log('No user is signed in');
+      }
+    });
+  }
 
   if (page.includes('login.html')) {
     const loginButton = document.getElementById('login');
