@@ -22,5 +22,10 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-console': 0,
+    'no-alert': 0,
+    'import/no-cycle': 0,
+    'no-param-reassign': 0,
+    'no-underscore-dangle': 0,
   },
 };
