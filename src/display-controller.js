@@ -6,6 +6,7 @@ import { historicalData } from './fetch-data';
 import { coins } from './coin-data';
 import getCoins from './index';
 import './assets/logo-light.png';
+import { checkIfCoinIsInWatchlist } from './login-register';
 
 // Show hamburger menu
 export function showMenu() {
@@ -33,6 +34,18 @@ function capitalizeFullName(fullName) {
   return capitalizedWords.join(' ');
 }
 
+// * Load watchlist items
+export function loadWatchlistItems(watchlist) {
+  const watchlistContainer = document.getElementById('watchlist');
+
+  for (const key in watchlist) {
+    const coin = watchlist[key][0].toUpperCase() + watchlist[key].slice(1);
+    const coinElement = document.createElement('li');
+    coinElement.textContent = coin;
+    watchlistContainer.append(coinElement);
+  }
+}
+
 // * Load profile to header
 export function loadProfileToHeader(fullName) {
   const loginRegister = document.querySelector('.login-register');
@@ -40,6 +53,7 @@ export function loadProfileToHeader(fullName) {
   const span = profile.querySelector('span');
 
   loginRegister.classList.add('display-none');
+  profile.classList.remove('display-none');
   span.textContent = capitalizeFullName(fullName);
 }
 
@@ -285,13 +299,34 @@ function recursiveSearch(e) {
 }
 
 // * Current selected coin
-let coinId;
+export let coinId;
+
+// * Change which watchlist star is active
+export function changeWatchlistStar() {
+  const inactiveStar = document.querySelector('.watch svg');
+  const activeStar = document.querySelector('.watched');
+
+  if (activeStar.classList.contains('display-none')) {
+    inactiveStar.classList.add('display-none');
+    activeStar.classList.remove('display-none');
+    return true;
+  }
+  inactiveStar.classList.remove('display-none');
+  activeStar.classList.add('display-none');
+  return false;
+}
 
 // Load chart when table-row is clicked
 function rowListener(row) {
-  row.addEventListener('click', (e) => {
+  row.addEventListener('click', async (e) => {
     const coinContainer = recursiveSearch(e.target);
     coinId = coinContainer.querySelector('td:nth-child(2) > span').textContent.toLowerCase();
+    checkIfCoinIsInWatchlist(coinId)
+      .then((flag) => {
+        if (flag) {
+          changeWatchlistStar();
+        }
+      });
     loadCoinDetails(coinId);
   });
 }
