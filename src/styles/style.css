@@ -269,6 +269,24 @@ input[type="radio"] {
     background-color: #F8FAFD;
 }
 
+.watch svg {
+    width: 18px;
+    height: 18px;
+    fill: #777779;
+}
+.watch {
+    background-color: var(--border-color);
+    padding: 6px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.watch .watched {
+    fill: #F4B97F;
+}
+
 .checked {
     background-color: #fff;
 }

@@ -139,7 +139,7 @@ nav {
 
 .bottom-nav div:hover{
     color: var(--primary-color);
-    border-right:2px solidvar(--primary-color);
+    border-right:2px solid var(--primary-color);
 }
 
 .bottom-nav div.active {
@@ -192,12 +192,23 @@ nav {
     display: flex;
     align-items: center;
     border: none !important;
+    flex: 1 1 300px;
+}
+
+.profile:hover {
+    fill: var(--primary-color);
+}
+
+.profile a {
+    text-align: right;
+    margin-right: 20px;
 }
 
 .profile svg {
     width: 18px;
     height: 18px;
     margin-right: 5px;
+    fill: inherit;
 }
 
 @media only screen and (max-width: 900px) {
@@ -288,6 +299,12 @@ nav {
         width: 18px;
         height: 18px;
         margin-right: 3px;
+    }
+    .profile {
+        flex-basis: auto;
+    }
+    .profile a {
+        text-align: left;
     }
 
 }
